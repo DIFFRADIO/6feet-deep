@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Save me a spot · 6FEET Deep 001: Viridity</title>
+<meta name="description" content="Invite only. Free headline set from Viridity at 6FEET Under, Cardiff. Sat 17 Oct. Every set filmed. Save your spot.">
+<meta property="og:title" content="6FEET Deep 001: Viridity · Save me a spot">
+<meta property="og:description" content="Invite only. Free entry. Every set filmed. 50 spaces at 6FEET Under, Cardiff, Sat 17 Oct.">
+<meta property="og:image" content="poster.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --panel:#0e0e0e; --line:#262626; --text:#fff; --muted:#a3a3a3; --dim:#6b6b6b;
+  --orange:#ea5a0c; --orange-hi:#ff6a1a; --red:#e3161b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Sora,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+
+/* ambient blurred video behind everything (desktop) */
+.ambient{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.ambient video{width:100%;height:100%;object-fit:cover;filter:blur(40px) saturate(1.3) brightness(.35);transform:scale(1.2)}
+
+.wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr;min-height:100vh}
+
+/* ---------- trailer ---------- */
+.trailer{position:relative;background:#000}
+.trailer .frame{position:relative;width:100%;max-width:calc((100svh - 150px) * 9 / 16);margin:0 auto;aspect-ratio:9/16;overflow:hidden}
+.trailer video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.trailer .shade{display:none}
+.sound{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;z-index:3;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.55);backdrop-filter:blur(8px);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.sound svg{width:16px;height:16px}
+.trailer-cta{padding:14px 16px 18px;max-width:560px;margin:0 auto}
+
+/* ---------- meter ---------- */
+.meter{margin-bottom:14px}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:13px;margin-bottom:8px}
+.meter-top b{font-size:15px}
+.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:7px;vertical-align:1px;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(227,22,27,.7)}70%{box-shadow:0 0 0 9px rgba(227,22,27,0)}100%{box-shadow:0 0 0 0 rgba(227,22,27,0)}}
+.bar{height:6px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--red));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.meter-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:10px;background:var(--orange);color:#000;font-weight:800;font-size:17px;letter-spacing:.01em;text-decoration:none;cursor:pointer;transition:background .15s,transform .1s}
+.btn:hover{background:var(--orange-hi)}
+.btn:active{transform:scale(.99)}
+.btn[disabled]{opacity:.6;cursor:wait}
+
+/* ---------- content ---------- */
+.content{position:relative;background:#000;padding:36px 16px 56px;border-top:1px solid var(--line)}
+.inner{max-width:560px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.brand img{width:40px;height:auto}
+.brand span{font-size:12px;font-weight:700;letter-spacing:.22em}
+.brand span em{display:block;font-style:normal;color:var(--orange);font-size:10px;letter-spacing:.24em}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+h1{font-size:clamp(44px,12vw,68px);line-height:.95;font-weight:800;letter-spacing:-.02em}
+h1 .six{color:var(--red)}
+.issue{display:flex;align-items:center;gap:14px;margin:14px 0 6px;font-size:26px;font-weight:800}
+.issue small{color:var(--orange);font-size:16px;letter-spacing:.2em}
+.when{color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 34px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:#ddd}
+.tag.hot{border-color:var(--orange);color:var(--orange)}
+
+.pitch{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:40px}
+.pitch div{background:var(--panel);padding:18px 18px}
+.pitch h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.pitch p{font-size:14px;color:var(--muted)}
+.pitch .n{color:var(--orange);font-size:11px;font-weight:700;letter-spacing:.2em;display:block;margin-bottom:6px}
+
+h2{font-size:24px;font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+.headliner{border-left:3px solid var(--orange);padding:4px 0 4px 16px;margin-bottom:40px}
+.headliner p{color:var(--muted);font-size:15px}
+.headliner p b{color:var(--text)}
+
+.order{list-style:none;border-top:1px solid var(--line);margin-bottom:44px}
+.order li{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.order time{color:var(--orange);font-weight:700;font-variant-numeric:tabular-nums}
+.order li.hl{font-weight:800}
+.order li.hl span{color:var(--text)}
+.order li span em{font-style:normal;color:var(--dim);font-size:13px;margin-left:6px}
+
+/* ---------- form ---------- */
+.formcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 18px;scroll-margin-top:16px}
+.formcard .sub{color:var(--muted);font-size:14px;margin:-6px 0 20px}
+.field{margin-bottom:16px}
+label,.lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#cfcfcf;margin-bottom:7px}
+.req{color:var(--orange)}
+input[type=text],input[type=email],input[type=tel]{width:100%;height:52px;padding:0 14px;border-radius:9px;border:1px solid #333;background:#000;font-size:16px;outline:none;transition:border-color .15s}
+input:focus{border-color:var(--orange)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:9px 13px;border-radius:999px;border:1px solid #333;font-size:14px;font-weight:600;transition:all .12s;user-select:none}
+.chip input:checked+span{background:var(--orange);border-color:var(--orange);color:#000}
+.chip input:focus-visible+span{outline:2px solid #fff;outline-offset:2px}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.yn .chip span{display:block;text-align:center;padding:13px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.err{color:#ff6b6b;font-size:14px;margin:4px 0 12px;min-height:0}
+.fine{font-size:12px;color:var(--dim);margin-top:14px;line-height:1.6}
+
+.done{display:none;text-align:center;padding:12px 4px}
+.done .tick{width:64px;height:64px;border-radius:50%;background:var(--orange);color:#000;display:grid;place-items:center;margin:0 auto 18px}
+.done .tick svg{width:30px;height:30px}
+.done h2{margin-bottom:8px}
+.done p{color:var(--muted);font-size:15px;margin-bottom:8px}
+.done .btn{margin-top:18px;background:transparent;color:var(--text);border:1px solid #444}
+.done .btn:hover{border-color:var(--orange);background:transparent}
+
+.where{margin-top:40px;font-size:14px;color:var(--muted)}
+.where b{color:var(--text)}
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a{text-decoration:none}
+.foot a:hover{color:var(--orange)}
+
+/* sticky mobile bar once trailer scrolled away */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:10px 16px max(10px,env(safe-area-inset-bottom));background:rgba(0,0,0,.88);backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s}
+.sticky.show{transform:none}
+.sticky .btn{min-height:50px;font-size:16px}
+.sticky small{display:block;text-align:center;font-size:11px;color:var(--muted);margin-top:6px}
+
+/* ---------- desktop ---------- */
+@media (min-width:960px){
+  .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:1200px;margin:0 auto;gap:56px;padding:0 40px}
+  .trailer{position:sticky;top:0;height:100vh;background:transparent;display:flex;align-items:center;justify-content:flex-end}
+  .trailer .frame{position:relative;height:min(88vh,860px);width:auto;max-width:none;margin:0;aspect-ratio:9/16;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08)}
+  .trailer .shade,.trailer-cta{display:none}
+  .sound{position:absolute;top:16px;right:16px}
+  .content{background:transparent;padding:72px 0 72px}
+  .inner{margin:0}
+  .sticky{display:none}
+}
+@media (max-width:959px){ .ambient{display:none} }
+@media (prefers-reduced-motion:reduce){ .live-dot{animation:none} .bar i{transition:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"><video src="promo.mp4" muted loop playsinline autoplay preload="none"></video></div>
+
+<div class="wrap">
+  <!-- Trailer -->
+  <section class="trailer" aria-label="Promo video">
+    <div class="frame">
+      <video id="promo" src="promo.mp4" poster="poster.jpg" muted loop playsinline autoplay preload="auto"></video>
+      <button class="sound" id="soundBtn" type="button" aria-pressed="false">
+        <svg id="icoOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="m23 9-6 6M17 9l6 6"/></svg>
+        <svg id="icoOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+        <span id="soundTxt">Sound on</span>
+      </button>
+    </div>
+    <div class="shade"></div>
+    <div class="trailer-cta">
+      <div class="meter" data-meter>
+        <div class="meter-top"><span><span class="live-dot"></span><b data-m-label>Spots being saved now</b></span><span data-m-count></span></div>
+        <div class="bar"><i data-m-bar></i></div>
+      </div>
+      <a class="btn" href="#save">Save me a spot</a>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <main class="content">
+    <div class="inner">
+      <div class="brand"><img src="logo.png" alt="DIFF Radio"><span>DIFF RADIO<em>PRESENTS</em></span></div>
+
+      <p class="kicker">Invite only · You've been sent this link</p>
+      <h1><span class="six">6FEET</span><br>Deep</h1>
+      <div class="issue"><small>001</small> VIRIDITY</div>
+      <p class="when">Saturday 17 October · Doors 17:30 · 6FEET Under, Cardiff</p>
+
+      <div class="tags">
+        <span class="tag hot">Free entry</span>
+        <span class="tag hot">50 spaces</span>
+        <span class="tag">Every set filmed</span>
+        <span class="tag">No walk-ins</span>
+        <span class="tag">18+</span>
+      </div>
+
+      <div class="meter" data-meter style="margin-bottom:34px">
+        <div class="meter-top"><span><span class="live-dot"></span><b data-m-label>Spots being saved now</b></span><span data-m-count></span></div>
+        <div class="bar"><i data-m-bar></i></div>
+        <p class="meter-note" data-m-note>Spots are going to presenters and their +1s first. Once they're gone, they're gone.</p>
+      </div>
+
+      <div class="pitch">
+        <div><span class="n">01 · EXCLUSIVE</span><h3>A closed room</h3><p>The venue shuts its doors. No walk-ins, no door sales. Just 50 people, all on the list by name.</p></div>
+        <div><span class="n">02 · FREE</span><h3>A headline set, on the house</h3><p>A signed headline artist playing a full hour in a basement club, mid-floor with the crowd all around. Free entry.</p></div>
+        <div><span class="n">03 · FILMED</span><h3>You're part of the film</h3><p>Every set is filmed with multiple cameras and released on DIFF Radio's YouTube, Instagram and TikTok. The crowd is in the shot.</p></div>
+        <div><span class="n">04 · CARDIFF</span><h3>The heartbeat of the underground</h3><p>DJs, producers, promoters and the DIFF Radio family in one room. This is Cardiff's scene, on show.</p></div>
+      </div>
+
+      <h2>The headliner</h2>
+      <div class="headliner">
+        <p><b>Viridity</b> is a drum &amp; bass producer, vocalist and DJ, with a debut on Shogun Audio and a monthly show on Rinse FM. She sings live over her set, so expect more than a DJ set.</p>
+      </div>
+
+      <h2>Running order</h2>
+      <ul class="order">
+        <li><time>17:30</time><span>Doors</span></li>
+        <li><time>18:00</time><span>Lady Niah</span></li>
+        <li><time>18:30</time><span>AK</span></li>
+        <li class="hl"><time>19:00</time><span>Viridity <em>60 min · live vocals</em></span></li>
+        <li><time>20:00</time><span>Alkali</span></li>
+        <li><time>20:30</time><span>Lubi J &amp; Electra</span></li>
+        <li><time>21:00</time><span>Conker <em>to 21:30</em></span></li>
+      </ul>
+
+      <!-- Form -->
+      <section class="formcard" id="save" aria-live="polite">
+        <div id="formWrap">
+          <h2 id="formTitle">Save me a spot</h2>
+          <p class="sub" id="formSub">Takes 20 seconds. Your name goes on the door list.</p>
+          <form id="spotForm" novalidate>
+            <div class="field"><label for="f-name">Full name <span class="req">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="As it'll be on the door"></div>
+            <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@email.com"></div>
+            <div class="field"><label for="f-phone">Mobile <span class="req">*</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" required maxlength="30" placeholder="07..."></div>
+            <div class="field">
+              <span class="lbl">What do you listen to? <span style="color:var(--dim);text-transform:none;letter-spacing:0;font-weight:400">Pick any</span></span>
+              <div class="chips" id="genres"></div>
+            </div>
+            <div class="field">
+              <span class="lbl">Heard of DIFF Radio before? <span class="req">*</span></span>
+              <div class="yn">
+                <label class="chip"><input type="radio" name="heard" value="yes" required><span>Yes</span></label>
+                <label class="chip"><input type="radio" name="heard" value="no"><span>No</span></label>
+              </div>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+            <p class="err" id="err" role="alert"></p>
+            <button class="btn" id="submitBtn" type="submit">Save me a spot</button>
+            <p class="fine">Free entry, 18+ only (bring ID). Your spot is for you and isn't transferable. The night is filmed, so by coming you're happy to appear in footage. We'll only use your details for this event.</p>
+          </form>
+        </div>
+        <div class="done" id="done">
+          <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h2 id="doneTitle">Your spot's saved</h2>
+          <p id="doneMsg">You're on the list for 6FEET Deep 001. Sat 17 Oct, doors 17:30, 6FEET Under. Bring ID.</p>
+          <a class="btn" id="calBtn" href="#" download="6feet-deep-001-viridity.ics">Add to calendar</a>
+        </div>
+      </section>
+
+      <p class="where"><b>6FEET Under</b> · 94 St Mary's St, Cardiff CF10 1DX</p>
+      <div class="foot"><span>6FEET DEEP · DIFF RADIO</span><span><a href="https://diffradio.com">diffradio.com</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></span></div>
+    </div>
+  </main>
+</div>
+
+<div class="sticky" id="sticky"><a class="btn" href="#save">Save me a spot</a><small data-m-sticky></small></div>
+
+<script>
+const CONFIG = {
+  supabaseUrl: "https://tgmpgjvvtyhtodltvhbz.supabase.co",
+  publishableKey: "sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK",
+  slug: "001-viridity",
+  displayCap: 50
+};
+const GENRES = ["Drum & Bass","Jungle","House","Techno","UK Garage","Dubstep","Bass / 140","Breaks","Grime","Disco","Trance","Ambient"];
+
+async function rpc(fn, body){
+  const r = await fetch(`${CONFIG.supabaseUrl}/rest/v1/rpc/${fn}`, {
+    method:"POST",
+    headers:{ "apikey":CONFIG.publishableKey, "Content-Type":"application/json" },
+    body:JSON.stringify(body)
+  });
+  if(!r.ok) throw new Error(`${fn} failed (${r.status}): ${await r.text()}`);
+  return r.json();
+}
+
+/* ---- video sound ---- */
+const vid = document.getElementById("promo"), sBtn = document.getElementById("soundBtn");
+sBtn.addEventListener("click", () => {
+  vid.muted = !vid.muted;
+  if(!vid.muted){ vid.currentTime = 0; vid.play().catch(()=>{}); }
+  sBtn.setAttribute("aria-pressed", String(!vid.muted));
+  document.getElementById("icoOff").style.display = vid.muted ? "" : "none";
+  document.getElementById("icoOn").style.display = vid.muted ? "none" : "";
+  document.getElementById("soundTxt").textContent = vid.muted ? "Sound on" : "Sound off";
+});
+vid.play().catch(()=>{});
+
+/* ---- genres ---- */
+document.getElementById("genres").innerHTML = GENRES.map(g =>
+  `<label class="chip"><input type="checkbox" name="genres" value="${g}"><span>${g.replace("&","&amp;")}</span></label>`).join("");
+
+/* ---- meter ---- */
+let state = { saved:null, full:false, open:true };
+function renderMeter(){
+  const s = state.saved;
+  if(s === null) return;
+  const cap = CONFIG.displayCap;
+  let label, count, pct, note, sticky;
+  if(!state.open){
+    label="Sign-ups closed"; count=""; pct=100; note="The list is closed for this one."; sticky="List closed";
+  } else if(state.full){
+    label="Fully booked"; count=""; pct=100; note="Every spot's gone. Join the waitlist and we'll message you if one comes back."; sticky="Fully booked · waitlist open";
+  } else if(s >= cap){
+    label="All 50 spots saved"; count="Final few released"; pct=100; note="All 50 are gone. We've released a final few. Save yours now."; sticky="Final few released";
+  } else {
+    label="Spots being saved now"; count=`<b>${s}</b> / ${cap} saved`; pct=Math.max(4, s/cap*100);
+    note = s >= cap*0.7 ? `Only ${cap-s} left. They're going fast.` : "Spots are going to presenters and their +1s first. Once they're gone, they're gone.";
+    sticky = `${cap-s} of ${cap} spots left`;
+  }
+  document.querySelectorAll("[data-m-label]").forEach(e=>e.textContent=label);
+  document.querySelectorAll("[data-m-count]").forEach(e=>e.innerHTML=count);
+  document.querySelectorAll("[data-m-bar]").forEach(e=>e.style.width=pct+"%");
+  document.querySelectorAll("[data-m-note]").forEach(e=>e.textContent=note);
+  document.querySelectorAll("[data-m-sticky]").forEach(e=>e.textContent=sticky);
+  if(state.full || !state.open){
+    document.getElementById("formTitle").textContent = state.open ? "Join the waitlist" : "Sign-ups closed";
+    document.getElementById("formSub").textContent = state.open ? "Spots sometimes come back. Leave your details and we'll message you first." : "Follow @diff_radio for the next one.";
+    document.getElementById("submitBtn").textContent = "Join the waitlist";
+    document.querySelectorAll(".btn[href='#save']").forEach(b=>b.textContent = state.open ? "Join the waitlist" : "Sign-ups closed");
+    if(!state.open) document.getElementById("spotForm").style.display="none";
+  }
+}
+async function loadStatus(){
+  try{
+    const d = await rpc("spot_status", { p_slug:CONFIG.slug });
+    if(d){ state = { saved:d.saved, full:d.full, open:d.is_open }; renderMeter(); }
+  }catch(e){ console.error("[6FEET Deep] status failed", e); }
+}
+loadStatus(); setInterval(loadStatus, 30000);
+
+/* ---- sticky bar ---- */
+const sticky = document.getElementById("sticky"), formCard = document.getElementById("save"), trailer = document.querySelector(".trailer");
+let trailerVisible = true, formVisible = false;
+const upd = () => sticky.classList.toggle("show", !trailerVisible && !formVisible);
+new IntersectionObserver(([e])=>{ trailerVisible = e.isIntersecting; upd(); }, {threshold:.15}).observe(trailer);
+new IntersectionObserver(([e])=>{ formVisible = e.isIntersecting; upd(); }, {threshold:.1}).observe(formCard);
+
+/* ---- calendar ---- */
+(function(){
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//DIFF Radio//6FEET Deep//EN","BEGIN:VEVENT",
+    "UID:6feet-deep-001@diffradio.com","DTSTAMP:20261005T120000Z",
+    "DTSTART:20261017T163000Z","DTEND:20261017T203000Z",
+    "SUMMARY:6FEET Deep 001: Viridity",
+    "LOCATION:6FEET Under\\, 94 St Mary's St\\, Cardiff CF10 1DX",
+    "DESCRIPTION:Invite only. Doors 17:30. Viridity 19:00-20:00. Bring ID (18+).",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  document.getElementById("calBtn").href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+})();
+
+/* ---- submit ---- */
+const form = document.getElementById("spotForm"), errEl = document.getElementById("err"), btn = document.getElementById("submitBtn");
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  errEl.textContent = "";
+  const fd = new FormData(form);
+  if(fd.get("website")) return; // bot
+  const name = (fd.get("name")||"").trim(), email = (fd.get("email")||"").trim(), phone = (fd.get("phone")||"").trim();
+  const heard = fd.get("heard");
+  if(!name) return fail("Add your name so we can put it on the door.", "f-name");
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail("That email doesn't look right.", "f-email");
+  if(phone.replace(/\D/g,"").length < 6) return fail("Add a mobile number.", "f-phone");
+  if(!heard) return fail("Let us know if you've heard of DIFF Radio.");
+  const ref = new URLSearchParams(location.search).get("ref");
+  btn.disabled = true; btn.textContent = "Saving...";
+  try{
+    const r = await rpc("save_spot", { p_slug:CONFIG.slug, p_name:name, p_email:email, p_phone:phone,
+      p_genres:fd.getAll("genres"), p_heard: heard === "yes", p_ref: ref });
+    showDone(r);
+  }catch(e){
+    console.error("[6FEET Deep] save failed", e);
+    btn.disabled = false; btn.textContent = state.full ? "Join the waitlist" : "Save me a spot";
+    fail("Something went wrong saving your spot. Try again, or message @diff_radio on Instagram.");
+  }
+});
+function fail(msg, id){ errEl.textContent = msg; if(id) document.getElementById(id).focus(); }
+function showDone(r){
+  const t = document.getElementById("doneTitle"), m = document.getElementById("doneMsg"), cal = document.getElementById("calBtn");
+  if(r.result === "saved" || (r.result === "already" && r.status === "saved")){
+    t.textContent = r.result === "already" ? "You're already on the list" : "Your spot's saved";
+  } else if(r.result === "waitlist" || r.status === "waitlist"){
+    t.textContent = "You're on the waitlist";
+    m.textContent = "All spots have gone, but you're next in line. We'll message you if one comes back.";
+    cal.style.display = "none";
+  } else if(r.result === "closed"){
+    t.textContent = "Sign-ups are closed"; m.textContent = "Follow @diff_radio for the next one."; cal.style.display="none";
+  }
+  document.getElementById("formWrap").style.display = "none";
+  document.getElementById("done").style.display = "block";
+  document.getElementById("save").scrollIntoView({block:"start"});
+  loadStatus();
+}
+</script>
+</body>
+</html>
