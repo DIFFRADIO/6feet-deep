@@ -140,7 +140,12 @@ input:focus{border-color:var(--orange)}
 .yn .chip span{display:block;text-align:center;padding:13px}
 .done .btn.solid{background:var(--orange);color:#000;border:0}
 .done .btn.solid:hover{background:var(--orange-hi)}
-.ticket{margin:20px auto 4px;max-width:300px;background:#000;border:1px solid #333;border-radius:14px;padding:16px}
+.shot{display:flex;gap:12px;align-items:center;text-align:left;margin:18px auto 0;max-width:300px;padding:12px 14px;border-radius:12px;background:var(--orange);color:#000}
+.shot svg{width:28px;height:28px;flex:none}
+.shot b{display:block;font-size:15px;font-weight:800}
+.shot span{display:block;font-size:13px;font-weight:600}
+.t-note b{color:var(--text)}
+.ticket{margin:12px auto 4px;max-width:300px;background:#000;border:1px solid #333;border-radius:14px;padding:16px}
 .t-lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
 .t-qr{background:#fff;border-radius:10px;padding:6px;width:210px;margin:0 auto}
 .t-qr svg{display:block;width:100%;height:auto}
@@ -313,6 +318,7 @@ input:focus{border-color:var(--orange)}
           <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
           <h2 id="doneTitle">Your spot's saved</h2>
           <p id="doneMsg">You're on the list for 6FEET Deep 001. Sat 17 Oct, doors 17:30, 6FEET Under. Bring ID.</p>
+          <div class="shot" id="shotTip" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.2"/></svg><div><b>Screenshot your ticket now</b><span>You'll show this QR code on the door. We've emailed you a copy too.</span></div></div>
           <div class="ticket" id="ticket" hidden>
             <span class="t-lbl">Your ticket</span>
             <div class="t-qr" id="tQr"></div>
@@ -320,7 +326,7 @@ input:focus{border-color:var(--orange)}
             <div class="t-name" id="tName"></div>
           </div>
           <button class="btn solid" id="pdfBtn" type="button" hidden>Save ticket (PDF)</button>
-          <p class="t-note" id="tNote" hidden>Show the QR code on the door with photo ID. Screenshot it or download the PDF.</p>
+          <p class="t-note" id="tNote" hidden><b>One scan only.</b> Your QR code works once on the door, so don't share it or post it. Bring photo ID (18+).</p>
           <p class="early-msg" id="earlyMsg" hidden></p>
           <a class="btn" id="calBtn" href="#" download="6feet-deep-001-viridity.ics">Add to calendar</a>
         </div>
@@ -337,7 +343,7 @@ input:focus{border-color:var(--orange)}
 <div class="sticky" id="sticky"><a class="btn" href="#save">Save me a spot</a><small data-m-sticky></small></div>
 
 <script src="../assets/js/qrcode.js?v=fbb6b69b"></script>
-<script src="../assets/js/ticket.js?v=f59a7a5b"></script>
+<script src="../assets/js/ticket.js?v=cbf26cc0"></script>
 <script>
 const CONFIG = {
   supabaseUrl: "https://tgmpgjvvtyhtodltvhbz.supabase.co",
@@ -499,7 +505,7 @@ function showTicket(code, attendee){
   document.getElementById("tQr").innerHTML = SixFD.qrSvg("6FD:" + code);
   document.getElementById("tCode").textContent = SixFD.fmtCode(code);
   document.getElementById("tName").textContent = attendee;
-  ["ticket","pdfBtn","tNote"].forEach(id => document.getElementById(id).hidden = false);
+  ["shotTip","ticket","pdfBtn","tNote"].forEach(id => document.getElementById(id).hidden = false);
   const pb = document.getElementById("pdfBtn");
   pb.onclick = async () => {
     pb.disabled = true; pb.textContent = "Making your ticket...";
@@ -513,7 +519,12 @@ function showDone(r){
   const t = document.getElementById("doneTitle"), m = document.getElementById("doneMsg"), cal = document.getElementById("calBtn");
   if(r.result === "saved" || (r.result === "already" && r.status === "saved")){
     t.textContent = r.result === "already" ? "You're already on the list" : "Your spot's saved";
-    if(r.ticket_code) showTicket(r.ticket_code, r.name);
+    if(r.ticket_code){
+      showTicket(r.ticket_code, r.name);
+      // email a copy (server only sends once per ticket)
+      fetch(`${CONFIG.supabaseUrl}/functions/v1/send-ticket`, { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ code:r.ticket_code }) })
+        .catch(e => console.error("[6FEET Deep] ticket email failed", e));
+    }
     else if(r.result === "already") m.textContent = "That email already has a spot. Use the same mobile number you signed up with to get your ticket again.";
   } else if(r.result === "waitlist" || r.status === "waitlist"){
     t.textContent = "You're on the waitlist";

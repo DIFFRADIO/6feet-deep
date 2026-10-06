@@ -63,7 +63,7 @@
     doc.setFontSize(14); doc.setTextColor(255, 255, 255);
     doc.text(doc.splitTextToSize(info.attendee, W - 14)[0], cx, by + box + 21, { align: "center" });
     doc.setFont("helvetica", "normal"); doc.setFontSize(6.5); doc.setTextColor(...grey);
-    doc.text("Free entry · Invite only · 18+ · Bring photo ID", cx, H - 13, { align: "center" });
+    doc.text("Scans once only · Don\u2019t share this ticket · Bring photo ID (18+)", cx, H - 13, { align: "center" });
     doc.text("Non-transferable · Every set is filmed · @diff_radio", cx, H - 9, { align: "center" });
     const name = info.file || "6feet-deep-ticket.pdf";
     // Phones: open the share sheet so people can Save to Files / Photos / send it on. Desktop: normal download.
