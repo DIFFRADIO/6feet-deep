@@ -35,6 +35,15 @@ p{font-size:15px;line-height:1.5;color:#ddd;margin-top:10px}
 .notify{border:1px solid var(--orange);border-radius:14px;padding:16px;margin-top:18px}
 .notify b{display:block;font-size:16px}
 .err{color:#ff6b6b;font-size:14px;margin-top:10px}
+.mates{margin-top:18px;padding:18px 16px;border:2px solid var(--orange);border-radius:14px;background:rgba(234,90,12,.08);text-align:center}
+.mates b{display:block;font-size:19px;line-height:1.2}
+.mates p{font-size:14px;color:#ddd;margin:6px 0 0;line-height:1.45}
+.mates .btn{margin-top:14px}
+.mates .mlink{display:block;margin-top:10px;font-size:13px;color:var(--muted);word-break:break-all;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.mates .copied{display:block;margin-top:8px;font-size:14px;font-weight:700;color:#7ee2a8}
+.le{background:var(--orange);color:#000;border-radius:12px;padding:14px;margin-top:16px;text-align:left}
+.le b{display:block;font-size:20px;font-weight:900}
+.le span{display:block;font-size:14px;line-height:1.45;margin-top:4px}
 .hide{display:none!important}
 </style>
 </head>
@@ -46,11 +55,11 @@ p{font-size:15px;line-height:1.5;color:#ddd;margin-top:10px}
   <div class="ev" id="ev"></div>
   <div class="when" id="when"></div>
   <div class="card" id="card"><p>Loading your ticket...</p></div>
-  <p class="fine">6FEET Under · 94 St Mary's St, Cardiff CF10 1DX<br><a href="#" id="pageLink">Lineup and details</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></p>
+  <p class="fine">6FEET Under · 94 St Mary's St, Cardiff CF10 1DX<br><a href="#" id="pageLink">Lineup and details</a> · <a href="../what-is-6feet-deep/">What is 6FEET Deep?</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></p>
 </div>
 
 <script src="../assets/js/qrcode.js?v=fbb6b69b"></script>
-<script src="../assets/js/ticket.js?v=cbf26cc0"></script>
+<script src="../assets/js/ticket.js?v=b986e938"></script>
 <script>
 const SB = { url:"https://tgmpgjvvtyhtodltvhbz.supabase.co", key:"sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK" };
 const NO_SHOW = "It's filmed and capped, so we need to know who's coming. If you can't make it, release your ticket and it goes straight to the next person on the waitlist. People who don't show and didn't release their ticket go to the back of the queue for future 6FEET Deep nights.";
@@ -83,13 +92,13 @@ function notifyBlock(){
 
 function render(){
   $("ev").innerHTML = `<b>${esc(T.num)}</b> ${esc(T.artist.toUpperCase())}`;
-  $("when").textContent = `${dayLong()} · Doors ${doorsTime()}`;
+  $("when").innerHTML = `${dayLong()} · Doors ${doorsTime()} · <b style="color:var(--orange)">Please arrive by 17:30</b>`;
   $("pageLink").href = T.page_url;
   let h = "";
   if(T.past){
     h = `<h1>This night has happened.</h1><p>Thanks for being part of 6FEET Deep ${esc(T.num)}.</p>` + notifyBlock();
   } else if(T.status === "saved" && T.checked_in){
-    h = `<h1>You're in, ${first()}.</h1><p>Enjoy the night.</p>`;
+    h = `<h1>You're in, ${first()}.</h1><p>${ask === "release" ? "This ticket has already been scanned in on the door, so it can't be released." : "Enjoy the night."}</p>`;
   } else if(T.status === "saved" && ask === "release"){
     h = `<h1>Release your ticket?</h1><p>Your QR code will stop working and your spot goes straight to the next person on the waitlist.</p>
       <button class="btn danger" id="doRelease">Yes, release my ticket</button><button class="btn ghost" id="keep">No, keep my ticket</button>`;
@@ -97,7 +106,8 @@ function render(){
     h = (T.promoted ? `<h1>Good news, ${first()}. A spot came free and it's yours.</h1>` : `<h1>${first()}, you're in.</h1>`)
       + (T.confirmed ? `<div class="ok">✓ Confirmed. See you there</div>`
                      : `<p>Still coming? One tap tells us.</p><button class="btn" id="doConfirm">Yes, I'm coming</button>`)
-      + ticketBlock()
+      + `<div class="le"><b>We're rolling from 18:00</b><span>Doors open 17:30. We'll be rolling from 18:00, so please come by 17:30. Otherwise you may have to wait to come in. We're doing this to <i>Put Cardiff On The Map</i>, and you're essential to it.</span></div>`
+      + ticketBlock() + `<div class="mates" id="mates"><b>Bring your mates</b><p>Tickets are free, but everyone needs their own. Send them the link before they're gone.</p><button class="btn" type="button" data-share><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="margin-right:8px"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v14"/></svg>Send your mates the link</button><span class="mlink" data-link title="Tap to copy"></span><span class="copied" data-copied hidden></span></div>`
       + `<button class="btn ghost" id="askRelease">Can't make it? Release your ticket</button><p class="fine">${NO_SHOW}</p>`;
   } else if(T.status === "waitlist"){
     h = `<h1>You're on the waitlist${T.waitlist_pos ? `, number ${T.waitlist_pos}` : ""}.</h1><p>If a ticket comes back before the morning of the night, it's yours and we'll email it straight over.</p>
@@ -127,8 +137,10 @@ function bind(){
   on("askRelease", () => { ask = "release"; render(); scrollTo(0,0); });
   on("keep", () => { ask = null; history.replaceState(null, "", `?c=${CODE}`); render(); });
   on("doRelease", b => act("release", b, "Releasing..."));
-  on("undo", async b => { const r = await act("undo", b, "Checking..."); if(r && r.result === "waitlisted") $("err").textContent = "Your old spot has gone, so you're at the front of the waitlist."; });
+  on("undo", async b => { const r = await act("undo", b, "Checking..."); if(r && r.result === "waitlisted") $("err").textContent = "Your old spot has already gone, so you.re back on the waitlist."; });
   on("notify", b => act("notify", b, "Adding you..."));
+  if($("mates")) SixFD.bindMates($("mates"), { url: SixFD.mateLink(T.page_url, T.name),
+    text: `I've got a free ticket to 6FEET Deep ${T.num}: ${T.artist} at 6FEET Under, Cardiff (${dayLong()}, doors ${doorsTime()}). Invite only, every set filmed, capped at 50. Get yours before they go:` });
   on("pdf", async b => {
     busy(b, "Making your ticket...");
     try{ await SixFD.ticketPdf({ num:T.num, artist:T.artist, dateLine:`${doors().toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric",timeZone:"UTC"})} · Doors ${doorsTime()}`, attendee:T.name, code:T.code, file:`6FEET-Deep-${T.num}-${T.artist}-ticket.pdf` }); }

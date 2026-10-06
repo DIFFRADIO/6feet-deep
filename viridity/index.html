@@ -69,6 +69,24 @@ h1 .six{color:var(--red)}
 .issue{display:flex;align-items:center;gap:14px;margin:14px 0 6px;font-size:26px;font-weight:800}
 .issue small{color:var(--orange);font-size:16px;letter-spacing:.2em}
 .when{color:var(--muted);font-size:15px}
+.whatis{display:inline-flex;gap:8px;align-items:center;margin:0 0 16px;padding:8px 14px;border:1px solid var(--orange);border-radius:999px;color:var(--orange);font-size:13px;font-weight:700;text-decoration:none}
+.whatis span{transition:transform .2s}.whatis:hover span{transform:translateX(3px)}
+.mission{position:relative;margin:0 0 40px;padding:26px 20px 22px;border-radius:16px;background:radial-gradient(120% 90% at 0% 0%,rgba(227,22,27,.28),transparent 60%),radial-gradient(120% 90% at 100% 100%,rgba(234,90,12,.25),transparent 60%),#0b0b0b;border:1px solid #2a2a2a;overflow:hidden}
+.mission .mk{font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--orange)}
+.mission .mh{font-size:46px;line-height:.95;font-weight:900;font-style:italic;letter-spacing:-.02em;margin:10px 0 14px}
+.mission .mh span{color:var(--red)}
+.mission > p{font-size:16px;color:#e6e6e6;line-height:1.5}
+.mission > p b{color:#fff;background:var(--red);padding:0 5px;border-radius:4px}
+.le{margin-top:18px;padding:16px;border-radius:12px;background:var(--orange);color:#000}
+.le-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.le-top b{font-size:24px;font-weight:900;letter-spacing:-.01em;line-height:1}
+.le-top span{font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;background:#000;color:var(--orange);padding:5px 9px;border-radius:999px}
+.le-count{font-size:14px;font-weight:800;margin-top:8px;font-variant-numeric:tabular-nums}
+.le p{font-size:14px;line-height:1.45;margin-top:6px}
+.why{list-style:none;margin-top:16px;display:grid;gap:10px}
+.why li{font-size:14px;color:#cfcfcf;padding-left:22px;position:relative;line-height:1.45}
+.why li:before{content:"";position:absolute;left:2px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--orange)}
+.why b{color:#fff}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 34px}
 .tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:#ddd}
 .tag.hot{border-color:var(--orange);color:var(--orange)}
@@ -87,7 +105,24 @@ h2{font-size:24px;font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .slides{position:absolute;inset:0;opacity:0;transition:opacity .9s;pointer-events:none;background:#000}
 .slides.on{opacity:1}
-.slides figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.1s ease}
+.slides figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .9s ease}
+/* RGB glitch cut between photos */
+.slides.gx figure{transition:opacity .08s linear}
+.slides .rgb{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;isolation:isolate;overflow:hidden}
+.slides .rgb i{position:absolute;inset:0;background-size:cover;background-position:center;background-blend-mode:multiply;mix-blend-mode:screen}
+.slides .rgb .r{background-color:#f00}.slides .rgb .g{background-color:#0f0}.slides .rgb .b{background-color:#00f}
+.slides.photo-only .rgb{transform:scale(1.07)}
+.slides figure.glitch .rgb{animation:gxOn .65s linear forwards}
+.slides figure.glitch .rgb .r{animation:gxR .65s steps(1) forwards}
+.slides figure.glitch .rgb .g{animation:gxG .65s steps(1) forwards}
+.slides figure.glitch .rgb .b{animation:gxB .65s steps(1) forwards}
+.slides figure.glitch::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 2px,transparent 2px 5px);animation:gxScan .65s steps(1) forwards}
+@keyframes gxOn{0%,82%{opacity:1}100%{opacity:0}}
+@keyframes gxR{0%{transform:translate(-22px,0);clip-path:inset(0 0 58% 0)}12%{transform:translate(16px,-4px);clip-path:inset(32% 0 18% 0)}24%{transform:translate(-12px,3px);clip-path:inset(0)}40%{transform:translate(8px,0)}58%{transform:translate(-4px,0)}74%,100%{transform:none}}
+@keyframes gxG{0%{transform:translate(0,5px);clip-path:inset(18% 0 36% 0)}12%{transform:translate(-5px,0);clip-path:inset(0 0 70% 0)}24%,100%{transform:none;clip-path:inset(0)}}
+@keyframes gxB{0%{transform:translate(22px,0);clip-path:inset(44% 0 0 0)}12%{transform:translate(-16px,4px);clip-path:inset(8% 0 52% 0)}24%{transform:translate(12px,-3px);clip-path:inset(0)}40%{transform:translate(-8px,0)}58%{transform:translate(4px,0)}74%,100%{transform:none}}
+@keyframes gxScan{0%,40%{opacity:1}41%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.slides figure.glitch .rgb,.slides figure.glitch::after{animation:none;opacity:0}}
 .slides figure.on{opacity:1}
 .pbadge{position:absolute;top:16px;left:16px;z-index:3;display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:10px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
 .pbadge img{width:30px;height:auto}
@@ -163,6 +198,12 @@ input:focus{border-color:var(--orange)}
 .nonly form{display:none;text-align:left;margin-top:12px}
 .nonly.open form{display:block}.nonly.open #nOpen{display:none}
 .nonly .ok{display:none;color:#7ee2a8;font-weight:700;margin-top:10px}
+.mates{margin-top:18px;padding:18px 16px;border:2px solid var(--orange);border-radius:14px;background:rgba(234,90,12,.08);text-align:center}
+.mates b{display:block;font-size:19px;line-height:1.2}
+.mates p{font-size:14px;color:#ddd;margin:6px 0 0;line-height:1.45}
+.mates .btn{margin-top:14px}
+.mates .mlink{display:block;margin-top:10px;font-size:13px;color:var(--muted);word-break:break-all;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.mates .copied{display:block;margin-top:8px;font-size:14px;font-weight:700;color:#7ee2a8}
 .manage{display:block;text-align:center;margin-top:14px;font-size:14px;color:var(--muted)}
 .early-msg{margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px!important;text-align:left}
 .early{text-transform:none;letter-spacing:0;color:var(--text);font-weight:400;display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid #333;border-radius:10px;cursor:pointer}
@@ -264,14 +305,16 @@ input:focus{border-color:var(--orange)}
       <div class="brand"><img src="../assets/logo.png?v=8ff0ba51" alt="DIFF Radio"><span>DIFF Radio<em>presents</em></span></div>
 
       <p class="kicker">Invite only · You've been sent this link</p>
+      <a class="whatis" href="../what-is-6feet-deep/">What is 6FEET Deep? <span>→</span></a>
       <h1><span class="six">6FEET</span><br>Deep</h1>
       <div class="issue"><small>001</small> VIRIDITY</div>
-      <p class="when">Saturday 17 October · Doors 17:30 · 6FEET Under, Cardiff</p>
+      <p class="when">Saturday 17 October · Doors 17:30 · Filming from 18:00 · 6FEET Under, Cardiff</p>
 
       <div class="tags">
         <span class="tag hot">Free entry</span>
         <span class="tag hot">50 spaces</span>
         <span class="tag">Every set filmed</span>
+        <span class="tag hot">Arrive by 17:30</span>
         <span class="tag">No walk-ins</span>
         <span class="tag">18+</span>
       </div>
@@ -282,6 +325,23 @@ input:focus{border-color:var(--orange)}
         <p class="meter-note" data-m-note>Spots are going to presenters and their +1s first. Once they're gone, they're gone.</p>
       </div>
 
+      <section class="mission" aria-label="Why you matter">
+        <div class="mk">Why you matter</div>
+        <div class="mh">Put Cardiff<br><span>On The Map</span></div>
+        <p>We're doing this event to <i>Put Cardiff On The Map</i>, and <b>YOU</b> are essential to this. Every set is filmed. A packed room from the very first track shows everyone how big Cardiff's underground really is.</p>
+        <div class="le">
+          <div class="le-top"><b>Rolling from 18:00</b><span>Be here 17:30</span></div>
+          <div class="le-count" data-le-count></div>
+          <p>Doors open 17:30. We'll be rolling from 18:00, so please come by 17:30. Otherwise you may have to wait to come in.</p>
+        </div>
+        <ul class="why">
+          <li><b>For the real ones.</b> This is for the real heads in the scene in our city.</li>
+          <li><b>Be in the film.</b> Here by 17:30 and you're in the crowd from the very first set.</li>
+          <li><b>Get there for 17:30</b> for the best spot in the room before the opener.</li>
+          <li><b>Bring your mates.</b> A full room is the whole point.</li>
+        </ul>
+      </section>
+
       <h2>The headliner</h2>
       <div class="headliner">
         <p><b>Viridity</b> is a drum &amp; bass producer, vocalist and DJ, with a debut on Shogun Audio and a monthly show on Rinse FM. She sings live over her set, so expect more than a DJ set.</p>
@@ -290,7 +350,7 @@ input:focus{border-color:var(--orange)}
 
       <h2>Running order</h2>
       <ul class="order">
-        <li><time>17:30</time><span>Doors</span></li>
+        <li><time>17:30</time><span>Doors <em>arrive by 17:30 · filming from 18:00</em></span></li>
         <li><time>18:00</time><span><img class="av" src="../assets/av-lady-niah.jpg?v=d9a8863a" alt="" loading="lazy">Lady Niah<a class="handle" href="https://instagram.com/shaniah_thompson" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@shaniah_thompson</a></span></li>
         <li><time>18:30</time><span><img class="av" src="../assets/av-ak.jpg?v=2282095a" alt="" loading="lazy">AK<a class="handle" href="https://instagram.com/ak_dnb" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@ak_dnb</a></span></li>
         <li class="hl"><time>19:00</time><span><img class="av" src="../assets/av-viridity.jpg?v=ed61259d" alt="" loading="lazy">Viridity <em>60 min · live vocals</em><a class="handle" href="https://instagram.com/viridity_uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@viridity_uk</a></span></li>
@@ -323,7 +383,7 @@ input:focus{border-color:var(--orange)}
             <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
             <p class="err" id="err" role="alert"></p>
             <button class="btn" id="submitBtn" type="submit">Save me a spot</button>
-            <p class="fine">Free entry, 18+ only (bring ID). Your spot is for you and isn't transferable. The night is filmed, so by coming you're happy to appear in footage. We'll only use your details for this event, unless you tick Notify me.</p>
+            <p class="fine">Free entry, 18+ only (bring ID). Please arrive by 17:30: we're filming from 18:00 and latecomers may have to wait. Your spot is for you and isn't transferable. The night is filmed, so by coming you're happy to appear in footage. We'll only use your details for this event, unless you tick Notify me.</p>
           </form>
           <div class="nonly" id="nonly">
             <h3 data-n-title>Can't make this one?</h3>
@@ -343,7 +403,7 @@ input:focus{border-color:var(--orange)}
         <div class="done" id="done">
           <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
           <h2 id="doneTitle">Your spot's saved</h2>
-          <p id="doneMsg">You're on the list for 6FEET Deep 001. Sat 17 Oct, doors 17:30, 6FEET Under. Bring ID.</p>
+          <p id="doneMsg">You're on the list for 6FEET Deep 001. Sat 17 Oct, doors 17:30, <b>please arrive by 17:30</b> (we're rolling from 18:00), 6FEET Under. Bring ID.</p>
           <div class="shot" id="shotTip" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.2"/></svg><div><b>Screenshot your ticket now</b><span>You'll show this QR code on the door. We've emailed you a copy too.</span></div></div>
           <div class="ticket" id="ticket" hidden>
             <span class="t-lbl">Your ticket</span>
@@ -354,12 +414,13 @@ input:focus{border-color:var(--orange)}
           <button class="btn solid" id="pdfBtn" type="button" hidden>Save ticket (PDF)</button>
           <p class="t-note" id="tNote" hidden><b>One scan only.</b> Your QR code works once on the door, so don't share it or post it. Bring photo ID (18+).</p>
           <p class="early-msg" id="earlyMsg" hidden></p>
+          <div class="mates" id="mates" hidden><b>Bring your mates</b><p>Tickets are free, but everyone needs their own. Send them the link before they're gone.</p><button class="btn solid" type="button" data-share><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="margin-right:8px"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v14"/></svg>Send your mates the link</button><span class="mlink" data-link title="Tap to copy"></span><span class="copied" data-copied hidden></span></div>
           <a class="manage" id="manage" href="#" hidden>Can't make it any more? Release your ticket</a>
           <a class="btn" id="calBtn" href="#" download="6feet-deep-001-viridity.ics">Add to calendar</a>
         </div>
       </section>
       <section class="also"><h2>Also coming up</h2>
-        <a class="also-card" href="../k-65/" data-date="2026-10-30"><img src="../assets/k65-card.jpg?v=8d924771" alt=""><div class="g"></div><div class="b"><div><span class="num">002</span><h3>K-65</h3><span class="d">Fri 30 Oct · Electro, breaks, techno</span></div><span class="go">Take a look</span></div></a>
+        <a class="also-card" href="../k-65/" data-date="2026-10-30"><img src="../assets/k65-card.jpg?v=4e13419a" alt=""><div class="g"></div><div class="b"><div><span class="num">002</span><h3>K-65</h3><span class="d">Fri 30 Oct · Electro, breaks, techno</span></div><span class="go">Take a look</span></div></a>
       </section>
       <p class="where"><b>6FEET Under</b> · 94 St Mary's St, Cardiff CF10 1DX</p>
       <div class="foot"><span><a href="../">6FEET DEEP</a> · DIFF Radio</span><span><a href="https://diffradio.com">diffradio.com</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></span></div>
@@ -370,7 +431,7 @@ input:focus{border-color:var(--orange)}
 <div class="sticky" id="sticky"><a class="btn" href="#save">Save me a spot</a><small data-m-sticky></small></div>
 
 <script src="../assets/js/qrcode.js?v=fbb6b69b"></script>
-<script src="../assets/js/ticket.js?v=cbf26cc0"></script>
+<script src="../assets/js/ticket.js?v=b986e938"></script>
 <script>
 const CONFIG = {
   supabaseUrl: "https://tgmpgjvvtyhtodltvhbz.supabase.co",
@@ -378,7 +439,8 @@ const CONFIG = {
   slug: "001-viridity",
   ticket: {"num": "001", "artist": "Viridity", "dateLine": "Sat 17 Oct 2026 \u00b7 Doors 17:30"},
   others: [{"slug": "002-k65", "label": "002 K-65"}],
-  displayCap: 50
+  displayCap: 50,
+  lastEntryUtc: "2026-10-17T18:00:00+01:00"
 };
 const GENRES = ["Drum & Bass","Jungle","House","Techno","UK Garage","Dubstep","Bass / 140","Breaks","Grime","Disco","Trance","Ambient"];
 
@@ -411,20 +473,31 @@ if(vid && sBtn){
   const box = document.getElementById("slides"), imgs = [...box.children];
   if(!imgs.length) return;
   const HOLD = 3200;
+  // RGB glitch: give every slide red/green/blue copies of its photo that split apart on the cut
+  box.classList.add("gx");
+  imgs.forEach(f => {
+    const im = f.querySelector("img"); if(!im) return;
+    const l = document.createElement("div"); l.className = "rgb";
+    l.innerHTML = ["r","g","b"].map(c => `<i class="${c}" style="background-image:url('${im.getAttribute("src")}')"></i>`).join("");
+    im.after(l);
+  });
+  const glitchTo = (from, to) => {
+    if(from) from.classList.remove("on", "glitch");
+    to.classList.remove("glitch"); void to.offsetWidth; to.classList.add("on", "glitch");
+    clearTimeout(to._gx); to._gx = setTimeout(() => to.classList.remove("glitch"), 700);
+  };
   if(!vid){
     // photo-only: loop the photos for ever
     let i = 0; box.classList.add("on"); imgs[0].classList.add("on");
-    setInterval(() => {
-      imgs[i].classList.remove("on"); i = (i + 1) % imgs.length; imgs[i].classList.add("on");
-    }, HOLD);
+    setInterval(() => { const j = (i + 1) % imgs.length; glitchTo(imgs[i], imgs[j]); i = j; }, HOLD);
     return;
   }
   vid.loop = false;
   vid.addEventListener("ended", () => {
-    let i = 0; box.classList.add("on"); imgs[0].classList.add("on");
+    let i = 0; box.classList.add("on"); glitchTo(null, imgs[0]);
     const t = setInterval(() => {
+      if(i + 1 < imgs.length){ glitchTo(imgs[i], imgs[i + 1]); i++; return; }
       imgs[i].classList.remove("on"); i++;
-      if(i < imgs.length){ imgs[i].classList.add("on"); return; }
       clearInterval(t); box.classList.remove("on");
       vid.currentTime = 0; vid.play().catch(()=>{});
     }, HOLD);
@@ -478,6 +551,17 @@ loadStatus(); setInterval(loadStatus, 30000);
 document.querySelectorAll("[data-date]").forEach(el => { if(new Date(el.dataset.date + "T23:59:59") < new Date()) el.remove(); });
 document.querySelectorAll(".also").forEach(el => { if(!el.querySelector(".also-card")) el.remove(); });
 
+/* ---- last-entry countdown ---- */
+(function(){
+  const els = document.querySelectorAll("[data-le-count]"), end = new Date(CONFIG.lastEntryUtc).getTime();
+  const tick = () => {
+    const ms = end - Date.now(), d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1e3) % 60;
+    const t = ms <= 0 ? "Cameras are rolling." : d >= 1 ? `Cameras roll in ${d} day${d > 1 ? "s" : ""} ${h}h` : h >= 1 ? `Cameras roll in ${h}h ${m}m` : `Cameras roll in ${m}m ${String(s).padStart(2,"0")}s`;
+    els.forEach(e => e.textContent = t);
+  };
+  tick(); setInterval(tick, 1000);
+})();
+
 /* ---- scroll cue ---- */
 const cue = document.querySelector(".scroll-cue");
 addEventListener("scroll", () => { if(scrollY > 80) cue.classList.add("gone"); }, {passive:true});
@@ -496,7 +580,7 @@ new IntersectionObserver(([e])=>{ formVisible = e.isIntersecting; upd(); }, {thr
     "DTSTART:20261017T163000Z","DTEND:20261017T203000Z",
     "SUMMARY:6FEET Deep 001: Viridity",
     "LOCATION:6FEET Under\\, 94 St Mary's St\\, Cardiff CF10 1DX",
-    "DESCRIPTION:Invite only. Doors 17:30. Viridity 19:00-20:00. Bring ID (18+).",
+    "DESCRIPTION:Invite only. Doors 17:30. Arrive by 17:30 - filming from 18:00. Viridity 19:00-20:00. Bring ID (18+).",
     "END:VEVENT","END:VCALENDAR"].join("\r\n");
   document.getElementById("calBtn").href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
 })();
@@ -543,6 +627,12 @@ function showTicket(code, attendee){
     pb.disabled = false; pb.textContent = "Save ticket (PDF)";
   };
 }
+function showMates(name){
+  const T = CONFIG.ticket, box = document.getElementById("mates");
+  SixFD.bindMates(box, { url: SixFD.mateLink(location.origin + location.pathname, name),
+    text: `I've got a free ticket to 6FEET Deep ${T.num}: ${T.artist} at 6FEET Under, Cardiff (${T.dateLine}). Invite only, every set filmed, capped at 50. Get yours before they go:` });
+  box.hidden = false;
+}
 function alertMsg(t){ const n = document.getElementById("tNote"); n.hidden = false; n.textContent = t; }
 function showDone(r){
   const t = document.getElementById("doneTitle"), m = document.getElementById("doneMsg"), cal = document.getElementById("calBtn");
@@ -551,6 +641,7 @@ function showDone(r){
     if(r.ticket_code){
       showTicket(r.ticket_code, r.name);
       const mg = document.getElementById("manage"); mg.href = `../ticket/?c=${r.ticket_code}`; mg.hidden = false;
+      showMates(r.name);
       // email a copy (server only sends once per ticket)
       fetch(`${CONFIG.supabaseUrl}/functions/v1/send-ticket`, { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ code:r.ticket_code }) })
         .catch(e => console.error("[6FEET Deep] ticket email failed", e));

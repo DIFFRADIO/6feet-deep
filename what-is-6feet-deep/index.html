@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What is 6FEET Deep? · DIFF Radio</title>
+<meta name="description" content="DIFF Radio's invite-only, filmed nights at 6FEET Under, Cardiff. Free tickets, a capped room, every set filmed. We're here to Put Cardiff On The Map.">
+<meta property="og:title" content="What is 6FEET Deep?">
+<meta property="og:description" content="Invite only. Free tickets. Every set filmed. For the real ones in Cardiff's scene.">
+<meta property="og:image" content="https://6feetdeep.diffradio.com/assets/6fd-concept-poster.jpg?v=4c9b3568">
+<meta property="og:url" content="https://6feetdeep.diffradio.com/what-is-6feet-deep/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../assets/logo.png?v=8ff0ba51">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--panel:#0e0e0e;--line:#262626;--text:#fff;--muted:#a3a3a3;--dim:#6b6b6b;--orange:#ea5a0c;--orange-hi:#ff6a1a;--red:#e3161b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Sora,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 16px 56px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.brand img{width:40px;height:auto}
+.brand span{font-size:12px;font-weight:700;letter-spacing:.22em}
+.brand span em{display:block;font-style:normal;color:var(--orange);font-size:10px;letter-spacing:.24em}
+.brand a.back{margin-left:auto;font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.hero{display:grid;gap:26px;align-items:center}
+.vid{position:relative;border-radius:18px;overflow:hidden;background:#111;aspect-ratio:9/16;max-height:78vh;margin:0 auto;width:100%;max-width:440px;border:1px solid var(--line)}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+h1{font-size:clamp(46px,12vw,92px);line-height:.92;font-weight:800;letter-spacing:-.02em}
+h1 .six{color:var(--red)}
+.lead{font-size:18px;color:#e6e6e6;margin-top:18px;max-width:560px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:#ddd}
+.tag.hot{border-color:var(--orange);color:var(--orange)}
+section{margin-top:48px}
+h2{font-size:26px;font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+.mission{padding:28px 20px 24px;border-radius:18px;background:radial-gradient(120% 90% at 0% 0%,rgba(227,22,27,.28),transparent 60%),radial-gradient(120% 90% at 100% 100%,rgba(234,90,12,.25),transparent 60%),#0b0b0b;border:1px solid #2a2a2a}
+.mission .mh{font-size:clamp(44px,11vw,72px);line-height:.95;font-weight:900;font-style:italic;letter-spacing:-.02em;margin:10px 0 16px}
+.mission .mh span{color:var(--red)}
+.mission > p{font-size:17px;color:#e6e6e6;max-width:620px}
+.mission > p b{color:#fff;background:var(--red);padding:0 5px;border-radius:4px}
+.points{display:grid;gap:12px;margin-top:22px}
+.pt{background:rgba(0,0,0,.45);border:1px solid #2a2a2a;border-radius:14px;padding:16px}
+.pt b{display:block;font-size:18px;font-weight:800}
+.pt span{display:block;font-size:15px;color:#cfcfcf;margin-top:4px}
+.pt.real{border-color:var(--orange);background:rgba(234,90,12,.1)}
+.pt.real b{font-size:22px;font-style:italic}
+.steps{counter-reset:s;display:grid;gap:10px}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.steps li:before{content:counter(s);flex:none;width:32px;height:32px;border-radius:50%;background:var(--orange);color:#000;font-weight:900;display:flex;align-items:center;justify-content:center}
+.steps b{display:block}.steps span{color:var(--muted);font-size:15px}
+.events{display:grid;grid-template-columns:1fr;gap:16px}
+.ev{position:relative;display:block;border:1px solid var(--line);border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#111}
+.ev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.ev .grad{position:absolute;inset:0;background:linear-gradient(to top,#000 30%,rgba(0,0,0,.35) 60%,rgba(0,0,0,.05))}
+.ev .body{position:absolute;left:0;right:0;bottom:0;padding:20px}
+.ev .num{color:var(--orange);font-size:14px;font-weight:700;letter-spacing:.2em}
+.ev h3{font-size:34px;font-weight:800;line-height:1.05;margin:2px 0 4px}
+.ev .date{color:var(--muted);font-size:14px;margin-bottom:14px}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border:0;border-radius:10px;background:var(--orange);color:#000;font-weight:800;font-size:16px;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--orange-hi)}
+.notify{border:2px solid var(--orange);border-radius:16px;padding:22px 18px;text-align:center}
+.notify p{color:#ddd;font-size:15px;margin:6px 0 14px}
+.notify form{display:grid;gap:10px;text-align:left;max-width:440px;margin:0 auto}
+.notify input{width:100%;height:50px;padding:0 14px;border-radius:9px;border:1px solid #333;background:#000;color:#fff;font:inherit;font-size:16px;outline:none}
+.notify input:focus{border-color:var(--orange)}
+.notify .err{color:#ff6b6b;font-size:14px;min-height:1em}
+.notify .ok{display:none;color:#7ee2a8;font-weight:700;margin-top:8px}
+.notify small{display:block;color:var(--dim);font-size:12px;margin-top:6px;text-align:center}
+.foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (min-width:860px){.hero{grid-template-columns:1fr 1fr}.events{grid-template-columns:1fr 1fr}.points{grid-template-columns:1fr 1fr}.pt.real{grid-column:1 / -1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><img src="../assets/logo.png?v=8ff0ba51" alt="DIFF Radio"><span>DIFF Radio<em>presents</em></span><a class="back" href="../">All nights</a></div>
+
+  <div class="hero">
+    <div>
+      <p class="kicker">What is</p>
+      <h1><span class="six">6FEET</span><br>Deep?</h1>
+      <p class="lead">DIFF Radio's invite-only, filmed nights at 6FEET Under, the basement club in the centre of Cardiff. One headline artist, Cardiff's own DJs around them, a capped room, and every set filmed. Tickets are free, but you need a link to get one.</p>
+      <div class="tags"><span class="tag hot">Free tickets</span><span class="tag hot">50 spaces</span><span class="tag">Every set filmed</span><span class="tag">No walk-ins</span><span class="tag">18+</span></div>
+    </div>
+    <div class="vid"><video src="../assets/6fd-concept.mp4?v=968e18df" poster="../assets/6fd-concept-poster.jpg?v=4c9b3568" muted loop playsinline autoplay preload="metadata"></video></div>
+  </div>
+
+  <section class="mission" aria-label="Why you matter">
+    <div class="kicker">Why you matter</div>
+    <div class="mh">Put Cardiff<br><span>On The Map</span></div>
+    <p>We're doing this event to <i>Put Cardiff On The Map</i>, and <b>YOU</b> are essential to this. Every set is filmed. A packed room from the very first track shows everyone how big Cardiff's underground really is.</p>
+    <div class="points">
+      <div class="pt real"><b>For the real ones.</b><span>This is for the real heads in the scene in our city: the people who turn up, know the music and make Cardiff's underground what it is.</span></div>
+      <div class="pt"><b>You're in the film.</b><span>The crowd is half the footage. Get in early and you're in it from the first set to the last.</span></div>
+      <div class="pt"><b>We're rolling from 18:00.</b><span>Doors open 17:30. Please come by 17:30, otherwise you may have to wait to come in.</span></div>
+      <div class="pt"><b>Bring your mates.</b><span>Everyone needs their own free ticket, so send them the link. A full room is the whole point.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><div><b>Claim your free ticket</b><span>Use the link you were sent. Your QR ticket comes straight to your phone and inbox.</span></div></li>
+      <li><div><b>Tell us if you're coming</b><span>We'll check in before the night. Can't make it? Release your ticket in one tap and it goes to the next person on the waitlist.</span></div></li>
+      <li><div><b>Arrive by 17:30</b><span>Bring your QR code and photo ID (18+). It scans once only.</span></div></li>
+      <li><div><b>Be part of the film</b><span>Every set is filmed and shared by DIFF Radio.</span></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>The nights</h2>
+    <div class="events">
+      <a class="ev" href="../viridity/" data-date="2026-10-17"><img src="../assets/viridity-card.jpg?v=c7217446" alt=""><div class="grad"></div><div class="body"><span class="num">001</span><h3>Viridity</h3><p class="date">Sat 17 Oct · Drum &amp; bass, live vocals</p><span class="btn">Get your ticket</span></div></a>
+      <a class="ev" href="../k-65/" data-date="2026-10-30"><img src="../assets/k65-card.jpg?v=4e13419a" alt=""><div class="grad"></div><div class="body"><span class="num">002</span><h3>K-65</h3><p class="date">Fri 30 Oct · Electro, breaks, techno</p><span class="btn">Claim your free ticket</span></div></a>
+    </div>
+  </section>
+
+  <section class="notify" id="notify">
+    <h2>Never miss one</h2>
+    <p>Get first dibs on the next 6FEET Deep, by email and text, before tickets open to everyone.</p>
+    <form id="nForm" novalidate>
+      <input id="n-name" type="text" autocomplete="name" maxlength="120" placeholder="Name">
+      <input id="n-email" type="email" autocomplete="email" maxlength="200" placeholder="Email *">
+      <input id="n-phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Mobile (for a text when tickets drop)">
+      <p class="err" id="nErr" role="alert"></p>
+      <button class="btn" id="nBtn" type="submit">Notify me</button>
+      <small>We'll only contact you about 6FEET Deep and DIFF Radio nights. Unsubscribe any time.</small>
+    </form>
+    <p class="ok" id="nOk">You're on the list. You'll hear about the next 6FEET Deep first.</p>
+  </section>
+
+  <div class="foot"><span>6FEET Under · 94 St Mary's St, Cardiff CF10 1DX</span><span><a href="https://diffradio.com">diffradio.com</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></span></div>
+</div>
+<script>
+const SB = { url:"https://tgmpgjvvtyhtodltvhbz.supabase.co", key:"sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK" };
+// past nights drop off the list
+document.querySelectorAll("[data-date]").forEach(el => { if(new Date(el.dataset.date + "T23:59:59") < new Date()) el.remove(); });
+const v = document.querySelector("video"); if(v) v.play().catch(()=>{});
+const f = document.getElementById("nForm"), err = document.getElementById("nErr"), b = document.getElementById("nBtn");
+f.addEventListener("submit", async ev => {
+  ev.preventDefault(); err.textContent = "";
+  const email = document.getElementById("n-email").value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.textContent = "That email doesn't look right."; return; }
+  b.disabled = true; b.textContent = "Adding you...";
+  try{
+    const r = await fetch(`${SB.url}/rest/v1/rpc/notify_me`, { method:"POST", headers:{ apikey:SB.key, "Content-Type":"application/json" },
+      body:JSON.stringify({ p_name:document.getElementById("n-name").value, p_email:email, p_phone:document.getElementById("n-phone").value, p_source:"about" }) });
+    if(!r.ok) throw new Error(r.status + " " + await r.text());
+    const d = await r.json(); if(d.result !== "ok") throw new Error(d.result);
+    f.style.display = "none"; document.getElementById("nOk").style.display = "block";
+  }catch(e){ console.error("[6FEET Deep] notify failed", e); b.disabled = false; b.textContent = "Notify me"; err.textContent = "Something went wrong. Try again, or message @diff_radio on Instagram."; }
+});
+</script>
+</body>
+</html>

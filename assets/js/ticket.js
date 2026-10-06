@@ -36,7 +36,7 @@
   /* info: {num, artist, dateLine, attendee, code, file} */
   async function ticketPdf(info) {
     const { jsPDF } = await loadJsPDF();
-    const W = 90, H = 172, doc = new jsPDF({ unit: "mm", format: [W, H] });
+    const W = 90, H = 180, doc = new jsPDF({ unit: "mm", format: [W, H] });
     const cx = W / 2, orange = [234, 90, 12], red = [227, 22, 27], grey = [170, 170, 170];
     doc.setFillColor(0, 0, 0); doc.rect(0, 0, W, H, "F");
     try { doc.addImage(await logoData(), "PNG", cx - 8, 8, 16, 16.8); } catch (e) { console.error("[6FEET Deep] logo", e); }
@@ -62,6 +62,9 @@
     ctext(doc, "ADMIT ONE", cx, by + box + 14, 1);
     doc.setFontSize(14); doc.setTextColor(255, 255, 255);
     doc.text(doc.splitTextToSize(info.attendee, W - 14)[0], cx, by + box + 21, { align: "center" });
+    doc.setFillColor(...orange); doc.roundedRect(10, H - 30, W - 20, 9, 2, 2, "F");
+    doc.setFont("helvetica", "bold"); doc.setFontSize(7.5); doc.setTextColor(0, 0, 0);
+    ctext(doc, "ARRIVE BY 17:30 \u00B7 FILMING FROM 18:00", cx, H - 24.6, 0.2);
     doc.setFont("helvetica", "normal"); doc.setFontSize(6.5); doc.setTextColor(...grey);
     doc.text("Scans once only · Don\u2019t share this ticket · Bring photo ID (18+)", cx, H - 13, { align: "center" });
     doc.text("Non-transferable · Every set is filmed · @diff_radio", cx, H - 9, { align: "center" });
@@ -77,5 +80,32 @@
     doc.save(name);
   }
 
-  window.SixFD = { qrSvg, ticketPdf, fmtCode };
+  /* "Bring your mates": share sheet where the browser has one, otherwise copy the link */
+  function refSlug(name) {
+    const p = String(name || "").trim().split(/\s+/);
+    return ((p[0] || "") + (p[1] ? "-" + p[1][0] : "")).toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 30) || "friend";
+  }
+  function mateLink(pageUrl, name) { const u = new URL(pageUrl, location.href); u.search = ""; u.searchParams.set("ref", refSlug(name)); return u.toString(); }
+  async function copyText(t) {
+    try { await navigator.clipboard.writeText(t); return true; } catch (e) {
+      const a = document.createElement("textarea"); a.value = t; a.style.position = "fixed"; a.style.opacity = "0"; document.body.appendChild(a); a.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {} a.remove(); return ok;
+    }
+  }
+  function bindMates(box, o) { // o: {url, text}
+    const btn = box.querySelector("[data-share]"), link = box.querySelector("[data-link]"), done = box.querySelector("[data-copied]");
+    link.textContent = o.url.replace(/^https?:\/\//, "");
+    const flash = (msg) => { done.textContent = msg; done.hidden = false; clearTimeout(flash.t); flash.t = setTimeout(() => done.hidden = true, 2500); };
+    const copy = async () => flash(await copyText(o.text + " " + o.url) ? "Link copied. Paste it to your mates" : "Copy this link: " + o.url);
+    btn.onclick = async () => {
+      if (navigator.share) {
+        try { await navigator.share({ title: "6FEET Deep", text: o.text, url: o.url }); return; }
+        catch (e) { if (e && e.name === "AbortError") return; console.error("[6FEET Deep] share failed, copying", e); }
+      }
+      copy();
+    };
+    link.onclick = copy;
+  }
+
+  window.SixFD = { qrSvg, ticketPdf, fmtCode, mateLink, bindMates };
 })();

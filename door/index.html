@@ -38,6 +38,7 @@ input:focus,select:focus{border-color:var(--orange)}
 .result .big{font-size:64px;font-weight:900;line-height:1}
 .result .name{font-size:30px;font-weight:800;margin-top:18px;word-break:break-word}
 .result .sub{font-size:17px;margin-top:10px;opacity:.9}
+.result .over{margin-top:26px;border:2px solid #fff;background:transparent;color:#fff;border-radius:10px;padding:12px 18px;font-weight:800;font-size:15px;cursor:pointer}
 .result .tap{position:absolute;bottom:28px;font-size:13px;opacity:.75}
 .result.ok{background:var(--ok)}.result.warn{background:var(--warn);color:#000}.result.bad{background:var(--red)}
 .search{position:sticky;top:0;background:var(--bg);padding-bottom:10px;z-index:2}
@@ -87,7 +88,7 @@ input:focus,select:focus{border-color:var(--orange)}
     <button class="btn ghost" id="out">Switch event / log out</button>
   </div>
 </div>
-<div class="result" id="res"><div class="big" id="rBig"></div><div class="name" id="rName"></div><div class="sub" id="rSub"></div><div class="tap">Tap to scan next</div></div>
+<div class="result" id="res"><div class="big" id="rBig"></div><div class="name" id="rName"></div><div class="sub" id="rSub"></div><button class="over hide" id="rOver" type="button">Let in now</button><div class="tap">Tap to scan next</div></div>
 
 <script src="../assets/js/jsQR.min.js"></script>
 <script>
@@ -156,13 +157,23 @@ $("tList").onclick = () => { $("tList").classList.add("on"); $("tScan").classLis
 /* ---- result screen ---- */
 function show(kind, big, name, sub){
   const r = $("res"); r.className = "result show " + kind;
+  $("rOver").classList.add("hide");
   $("rBig").textContent = big; $("rName").textContent = name || ""; $("rSub").textContent = sub || "";
   try{ navigator.vibrate && navigator.vibrate(kind === "ok" ? 120 : [200,100,200]); }catch(e){}
 }
 $("res").onclick = () => { $("res").className = "result"; S.busy = false; };
 
-async function check(raw){
-  if(S.busy) return; S.busy = true;
+// Filming from 18:00 (London time): late arrivals may have to wait for a set change
+const LAST_ENTRY = { "001-viridity":"2026-10-17T18:00:00+01:00", "002-k65":"2026-10-30T18:00:00+00:00" };
+async function check(raw, override){
+  if(S.busy && !override) return; S.busy = true;
+  const le = LAST_ENTRY[S.slug] && new Date(LAST_ENTRY[S.slug]).getTime();
+  if(!override && le && Date.now() > le && Date.now() < le + 6*36e5){
+    show("warn", "HOLD · FILMING", "", "Late arrival. Cameras are rolling: hold them until the set change, then let in.");
+    const o = $("rOver"); o.classList.remove("hide");
+    o.onclick = ev => { ev.stopPropagation(); o.classList.add("hide"); check(raw, true); };
+    return;
+  }
   try{
     const d = await rpc("door_check_in", { p_slug:S.slug, p_pin:S.pin, p_code:raw, p_undo:false });
     const t = d.checked_in_at ? new Date(d.checked_in_at).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}) : "";
