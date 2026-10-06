@@ -37,6 +37,10 @@ h1 .six{color:var(--red)}
 .ev{position:relative;display:block;border:1px solid var(--line);border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#111}
 .ev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .5s}
 .ev:hover img{transform:scale(1.03)}
+.ev video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ev.about{border-color:var(--orange)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid #fff}
+.ev:hover .btn.ghost{background:#fff;color:#000}
 .ev .grad{position:absolute;inset:0;background:linear-gradient(to top,#000 30%,rgba(0,0,0,.4) 60%,rgba(0,0,0,.1))}
 .ev .body{position:absolute;left:0;right:0;bottom:0;padding:20px}
 .ev .num{color:var(--orange);font-size:14px;font-weight:700;letter-spacing:.2em}
@@ -49,7 +53,9 @@ h1 .six{color:var(--red)}
 .ev:hover .btn{background:var(--orange-hi)}
 .foot{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .foot a:hover{color:var(--orange)}
+@media (min-width:760px) and (max-width:999px){.ev.about{grid-column:1 / -1;aspect-ratio:16/9}}
 @media (min-width:760px){.events{grid-template-columns:1fr 1fr}.wrap{padding-top:64px}}
+@media (min-width:1000px){.events{grid-template-columns:1fr 1fr 1fr}}
 </style>
 </head>
 <body>
@@ -85,13 +91,22 @@ h1 .six{color:var(--red)}
         <span class="btn" data-btn>Claim your free ticket</span>
       </div>
     </a>
+    <a class="ev about" href="what-is-6feet-deep/">
+      <video src="assets/6fd-tile.mp4" poster="assets/6fd-tile-poster.jpg" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="grad"></div>
+      <div class="body">
+        <span class="num">The series</span><h2>What is 6FEET Deep?</h2>
+        <p class="date">Inside the room · Invite only · Every set filmed · For the real ones</p>
+        <span class="btn ghost">Find out more</span>
+      </div>
+    </a>
   </div>
 
   <div class="foot"><span>6FEET Under · 94 St Mary's St, Cardiff CF10 1DX</span><span><a href="https://diffradio.com">diffradio.com</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></span></div>
 </div>
 <script>
 const SB = "https://tgmpgjvvtyhtodltvhbz.supabase.co", KEY = "sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK", CAP = 50;
-document.querySelectorAll(".ev").forEach(async card => {
+document.querySelectorAll(".ev[data-slug]").forEach(async card => {
   try{
     const r = await fetch(`${SB}/rest/v1/rpc/spot_status`, {method:"POST", headers:{apikey:KEY,"Content-Type":"application/json"}, body:JSON.stringify({p_slug:card.dataset.slug})});
     if(!r.ok) throw new Error(r.status + " " + await r.text());
