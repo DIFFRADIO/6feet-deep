@@ -152,6 +152,18 @@ input:focus{border-color:var(--orange)}
 .t-code{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:18px;letter-spacing:.08em;margin-top:12px}
 .t-name{font-size:16px;font-weight:700;margin-top:2px}
 .t-note{font-size:13px!important;color:var(--muted)}
+.nopt{display:flex;gap:14px;align-items:center;padding:16px;border:2px solid var(--orange);border-radius:14px;cursor:pointer;background:rgba(234,90,12,.08);text-transform:none;letter-spacing:0;color:var(--text);font-weight:400}
+.nopt input{width:26px;height:26px;accent-color:var(--orange);flex:none;margin:0}
+.nopt .bell{width:30px;height:30px;flex:none;color:var(--orange)}
+.nopt b{display:block;font-size:17px;line-height:1.2}
+.nopt span span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.nonly{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);text-align:center}
+.nonly h3{font-size:18px;margin-bottom:4px}
+.nonly p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.nonly form{display:none;text-align:left;margin-top:12px}
+.nonly.open form{display:block}.nonly.open #nOpen{display:none}
+.nonly .ok{display:none;color:#7ee2a8;font-weight:700;margin-top:10px}
+.manage{display:block;text-align:center;margin-top:14px;font-size:14px;color:var(--muted)}
 .early-msg{margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px!important;text-align:left}
 .early{text-transform:none;letter-spacing:0;color:var(--text);font-weight:400;display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid #333;border-radius:10px;cursor:pointer}
 .early input{width:20px;height:20px;accent-color:var(--orange);margin-top:2px;flex:none}
@@ -307,12 +319,26 @@ input:focus{border-color:var(--orange)}
                 <label class="chip"><input type="radio" name="heard" value="no"><span>No</span></label>
               </div>
             </div>
-            <div class="field" data-date="2026-10-30"><label class="early"><input type="checkbox" name="early" value="002-k65"><span><b>Early list for 002 K-65 too</b><span>Fri 30 Oct. Not a spot yet: you'll hear first before sign-ups open.</span></span></label></div>
+            <div class="field"><label class="nopt"><input type="checkbox" name="notify" value="1"><svg class="bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span><b>Notify me about the next 6FEET Deep</b><span>First dibs on free tickets, by email and text. Unsubscribe any time.</span></span></label></div>
             <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
             <p class="err" id="err" role="alert"></p>
             <button class="btn" id="submitBtn" type="submit">Save me a spot</button>
-            <p class="fine">Free entry, 18+ only (bring ID). Your spot is for you and isn't transferable. The night is filmed, so by coming you're happy to appear in footage. We'll only use your details for this event.</p>
+            <p class="fine">Free entry, 18+ only (bring ID). Your spot is for you and isn't transferable. The night is filmed, so by coming you're happy to appear in footage. We'll only use your details for this event, unless you tick Notify me.</p>
           </form>
+          <div class="nonly" id="nonly">
+            <h3 data-n-title>Can't make this one?</h3>
+            <p>Get first dibs on the next 6FEET Deep, by email and text, before tickets open to everyone.</p>
+            <button class="btn ghost" id="nOpen" type="button">Notify me about the next 6FEET Deep</button>
+            <form id="nForm" novalidate>
+              <div class="field"><label for="n-name">Name</label><input id="n-name" type="text" autocomplete="name" maxlength="120"></div>
+              <div class="field"><label for="n-email">Email <span class="req">*</span></label><input id="n-email" type="email" autocomplete="email" maxlength="200" placeholder="you@email.com"></div>
+              <div class="field"><label for="n-phone">Mobile <span style="color:var(--dim);text-transform:none;letter-spacing:0;font-weight:400">for a text when tickets drop</span></label><input id="n-phone" type="tel" autocomplete="tel" maxlength="30" placeholder="07..."></div>
+              <p class="err" id="nErr" role="alert"></p>
+              <button class="btn" id="nBtn" type="submit">Notify me</button>
+              <p class="fine">We'll only contact you about 6FEET Deep and DIFF Radio nights. Unsubscribe any time.</p>
+            </form>
+            <p class="ok" id="nOk">You're on the list. You'll hear about the next 6FEET Deep first.</p>
+          </div>
         </div>
         <div class="done" id="done">
           <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
@@ -328,6 +354,7 @@ input:focus{border-color:var(--orange)}
           <button class="btn solid" id="pdfBtn" type="button" hidden>Save ticket (PDF)</button>
           <p class="t-note" id="tNote" hidden><b>One scan only.</b> Your QR code works once on the door, so don't share it or post it. Bring photo ID (18+).</p>
           <p class="early-msg" id="earlyMsg" hidden></p>
+          <a class="manage" id="manage" href="#" hidden>Can't make it any more? Release your ticket</a>
           <a class="btn" id="calBtn" href="#" download="6feet-deep-001-viridity.ics">Add to calendar</a>
         </div>
       </section>
@@ -493,6 +520,8 @@ form.addEventListener("submit", async (ev) => {
     const r = await rpc("save_spot", { p_slug:CONFIG.slug, p_name:name, p_email:email, p_phone:phone,
       p_genres:fd.getAll("genres"), p_heard: heard === "yes", p_ref: ref || "", p_early: fd.getAll("early") });
     showDone(r);
+    if(fd.get("notify")) rpc("notify_me", { p_name:name, p_email:email, p_phone:phone, p_source:CONFIG.slug })
+      .catch(e => console.error("[6FEET Deep] notify failed", e));
   }catch(e){
     console.error("[6FEET Deep] save failed", e);
     btn.disabled = false; btn.textContent = state.full ? "Join the waitlist" : "Save me a spot";
@@ -521,6 +550,7 @@ function showDone(r){
     t.textContent = r.result === "already" ? "You're already on the list" : "Your spot's saved";
     if(r.ticket_code){
       showTicket(r.ticket_code, r.name);
+      const mg = document.getElementById("manage"); mg.href = `../ticket/?c=${r.ticket_code}`; mg.hidden = false;
       // email a copy (server only sends once per ticket)
       fetch(`${CONFIG.supabaseUrl}/functions/v1/send-ticket`, { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ code:r.ticket_code }) })
         .catch(e => console.error("[6FEET Deep] ticket email failed", e));
@@ -543,6 +573,23 @@ function showDone(r){
   document.getElementById("save").scrollIntoView({block:"start"});
   loadStatus();
 }
+
+/* ---- notify me about the next 6FEET Deep (no ticket needed) ---- */
+(function(){
+  const box = document.getElementById("nonly"), f = document.getElementById("nForm"), err = document.getElementById("nErr"), b = document.getElementById("nBtn");
+  document.getElementById("nOpen").onclick = () => { box.classList.add("open"); document.getElementById("n-email").focus(); };
+  f.addEventListener("submit", async ev => {
+    ev.preventDefault(); err.textContent = "";
+    const email = document.getElementById("n-email").value.trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.textContent = "That email doesn't look right."; return; }
+    b.disabled = true; b.textContent = "Adding you...";
+    try{
+      const r = await rpc("notify_me", { p_name:document.getElementById("n-name").value, p_email:email, p_phone:document.getElementById("n-phone").value, p_source:CONFIG.slug });
+      if(r.result !== "ok") throw new Error(r.result);
+      f.style.display = "none"; document.getElementById("nOk").style.display = "block";
+    }catch(e){ console.error("[6FEET Deep] notify failed", e); b.disabled = false; b.textContent = "Notify me"; err.textContent = "Something went wrong. Try again, or message @diff_radio on Instagram."; }
+  });
+})();
 </script>
 </body>
 </html>

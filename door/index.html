@@ -45,7 +45,13 @@ input:focus,select:focus{border-color:var(--orange)}
 .row .n{font-weight:700}.row .m{font-size:12px;color:var(--muted);margin-top:2px}
 .row button{flex:none;border:0;border-radius:8px;padding:10px 14px;font-weight:800;cursor:pointer;background:var(--orange);color:#000}
 .row button.in{background:#143d25;color:#7ee2a8}
-.row.wl .n{color:var(--muted)}
+.row.wl .n,.row.rel .n{color:var(--muted)}.row.rel .n{text-decoration:line-through}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+.stats div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center}
+.stats b{display:block;font-size:22px;line-height:1.1}.stats span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.stats .g b{color:#7ee2a8}.stats .a b{color:var(--warn)}.stats .r b{color:#ff6b6b}
+.tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:2px}
+.tag.c{background:#143d25;color:#7ee2a8}.tag.x{background:#3d1414;color:#ff8a8a}.tag.w{background:#333;color:#ccc}.tag.ns{background:#3d2a00;color:#ffb84d}
 .hide{display:none!important}
 </style>
 </head>
@@ -68,6 +74,7 @@ input:focus,select:focus{border-color:var(--orange)}
 
   <!-- app -->
   <div id="app" class="hide">
+    <div class="stats" id="stats"></div>
     <div class="tabs"><button id="tScan" class="on">Scan</button><button id="tList">Guest list</button></div>
     <div id="pScan">
       <div class="cam"><video id="vid" playsinline muted></video><div class="frame"></div><div class="hint" id="camHint">Point at the QR code</div></div>
@@ -99,7 +106,7 @@ async function login(slug, pin){
   try{
     const d = await rpc("door_list", { p_slug:slug, p_pin:pin });
     if(d.result !== "ok"){ $("lerr").textContent = "Wrong PIN for that event."; return; }
-    S.slug = slug; S.pin = pin; S.rows = d.rows; ss("door_slug", slug); ss("door_pin", pin);
+    S.slug = slug; S.pin = pin; S.rows = d.rows; S.past = d.past; ss("door_slug", slug); ss("door_pin", pin);
     $("login").classList.add("hide"); $("app").classList.remove("hide");
     renderRows(); startCam();
   }catch(e){ console.error("[door] login", e); $("lerr").textContent = "Couldn't reach the guest list. Check signal and try again."; }
@@ -110,7 +117,7 @@ $("out").onclick = () => { ss("door_pin", null); stopCam(); location.reload(); }
 
 async function refresh(){
   if(!S.slug) return;
-  try{ const d = await rpc("door_list", { p_slug:S.slug, p_pin:S.pin }); if(d.result === "ok"){ S.rows = d.rows; renderRows(); } }
+  try{ const d = await rpc("door_list", { p_slug:S.slug, p_pin:S.pin }); if(d.result === "ok"){ S.rows = d.rows; S.past = d.past; renderRows(); } }
   catch(e){ console.error("[door] refresh", e); }
 }
 setInterval(refresh, 20000);
@@ -118,13 +125,20 @@ setInterval(refresh, 20000);
 function renderRows(){
   const saved = S.rows.filter(r => r.status === "saved"), inN = saved.filter(r => r.in).length;
   $("count").innerHTML = `<b>${inN}</b> in / ${saved.length} on list`;
+  const conf = saved.filter(r => r.confirmed || r.in).length, rel = S.rows.filter(r => r.released && r.status === "cancelled").length, wl = S.rows.filter(r => r.status === "waitlist").length;
+  // before the night: who's confirmed / not replied; after: who didn't show
+  $("stats").innerHTML = S.past
+    ? `<div class="g"><b>${inN}</b><span>Came</span></div><div class="a"><b>${saved.length - inN}</b><span>No-show</span></div><div class="r"><b>${rel}</b><span>Released</span></div><div><b>${wl}</b><span>Waitlist</span></div>`
+    : `<div class="g"><b>${conf}</b><span>Confirmed</span></div><div class="a"><b>${saved.length - conf}</b><span>No reply</span></div><div class="r"><b>${rel}</b><span>Released</span></div><div><b>${wl}</b><span>Waitlist</span></div>`;
   const q = $("q").value.trim().toLowerCase();
   const list = S.rows.filter(r => !q || r.name.toLowerCase().includes(q) || (r.phone_end||"").endsWith(q));
   $("rows").innerHTML = list.map(r => {
     const t = r.in ? new Date(r.in).toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}) : "";
-    const meta = [r.status === "waitlist" ? "Waitlist" : "", r.phone_end ? "…" + r.phone_end : "", r.ref ? "via " + r.ref : ""].filter(Boolean).join(" · ");
+    const tag = r.status === "cancelled" ? '<span class="tag x">Released</span>' : r.status === "waitlist" ? '<span class="tag w">Waitlist</span>'
+      : (S.past && !r.in) ? '<span class="tag ns">No-show</span>' : (r.confirmed && !r.in) ? '<span class="tag c">Confirmed</span>' : "";
+    const meta = [r.phone_end ? "…" + r.phone_end : "", r.ref ? "via " + r.ref : ""].filter(Boolean).join(" · ");
     const btn = r.status !== "saved" ? "" : r.in ? `<button class="in" data-undo="${r.code}">In ${t}</button>` : `<button data-code="${r.code}">Check in</button>`;
-    return `<div class="row ${r.status === "waitlist" ? "wl" : ""}"><div><div class="n">${esc(r.name)}</div><div class="m">${esc(meta)}</div></div>${btn}</div>`;
+    return `<div class="row ${r.status === "waitlist" ? "wl" : r.status === "cancelled" ? "rel" : ""}"><div><div class="n">${esc(r.name)}${tag}</div><div class="m">${esc(meta)}</div></div>${btn}</div>`;
   }).join("") || `<p style="color:var(--muted);padding:16px 0">No one matches.</p>`;
 }
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
@@ -155,7 +169,7 @@ async function check(raw){
     if(d.result === "ok") show("ok", "IN", d.name, "Check photo ID matches · 18+");
     else if(d.result === "already") show("warn", "ALREADY IN", d.name, `Scanned at ${t}`);
     else if(d.result === "wrong_event") show("bad", "WRONG NIGHT", d.name, `Ticket is for ${d.event}`);
-    else if(d.result === "not_saved") show("bad", "NO SPOT", d.name, d.status === "waitlist" ? "On the waitlist, not the list" : "Early list only, not a spot");
+    else if(d.result === "not_saved") show("bad", d.status === "cancelled" ? "RELEASED" : "NO SPOT", d.name, d.status === "waitlist" ? "On the waitlist, not the list" : d.status === "cancelled" ? "They released this ticket. QR no longer valid" : "Early list only, not a spot");
     else if(d.result === "bad_pin") { show("bad", "PIN EXPIRED", "", "Log in again"); ss("door_pin", null); }
     else show("bad", "NOT FOUND", "", "Check the code or search the guest list");
     refresh();

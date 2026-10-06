@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Your ticket · 6FEET Deep</title>
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../assets/logo.png?v=8ff0ba51">
+<style>
+:root{--bg:#000;--panel:#0e0e0e;--line:#262626;--text:#fff;--muted:#a3a3a3;--dim:#6b6b6b;--orange:#ea5a0c;--red:#e3161b;--ok:#1f9d55}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+button{font:inherit;color:inherit}
+a{color:var(--orange)}
+.wrap{max-width:460px;margin:0 auto;padding:24px 16px 48px;text-align:center}
+.logo{width:56px;height:auto;display:block;margin:0 auto}
+.pres{font-size:11px;font-weight:700;letter-spacing:.2em;margin-top:10px}
+.brand{font-weight:900;font-size:40px;line-height:.95;margin-top:6px;letter-spacing:-.01em}.brand span{color:var(--red);display:block}
+.ev{font-size:20px;font-weight:800;margin-top:12px}.ev b{color:var(--orange)}
+.when{font-size:14px;color:var(--muted);margin-top:4px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;margin-top:22px}
+h1{font-size:22px;line-height:1.25}
+p{font-size:15px;line-height:1.5;color:#ddd;margin-top:10px}
+.qr{background:#fff;border-radius:14px;padding:12px;width:240px;margin:18px auto 0}.qr svg{display:block;width:100%;height:auto}
+.code{font-family:ui-monospace,Menlo,monospace;font-weight:800;font-size:20px;letter-spacing:.12em;margin-top:12px}
+.admit{font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--orange);margin-top:4px;text-transform:uppercase}
+.shot{background:var(--orange);color:#000;border-radius:12px;padding:12px 14px;margin-top:16px;text-align:left;font-size:14px;line-height:1.45}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:0;border-radius:12px;background:var(--orange);color:#000;font-weight:800;font-size:16px;cursor:pointer;margin-top:12px;text-decoration:none;padding:0 16px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid #444}
+.btn.danger{background:var(--red);color:#fff}
+.btn:disabled{opacity:.6}
+.ok{display:inline-flex;align-items:center;gap:8px;background:#143d25;color:#7ee2a8;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;margin-top:14px}
+.fine{font-size:13px;color:var(--muted);line-height:1.5;margin-top:16px}
+.notify{border:1px solid var(--orange);border-radius:14px;padding:16px;margin-top:18px}
+.notify b{display:block;font-size:16px}
+.err{color:#ff6b6b;font-size:14px;margin-top:10px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="logo" src="../assets/logo.png?v=8ff0ba51" alt="DIFF Radio">
+  <div class="pres">DIFF Radio presents</div>
+  <div class="brand"><span>6FEET</span>DEEP</div>
+  <div class="ev" id="ev"></div>
+  <div class="when" id="when"></div>
+  <div class="card" id="card"><p>Loading your ticket...</p></div>
+  <p class="fine">6FEET Under · 94 St Mary's St, Cardiff CF10 1DX<br><a href="#" id="pageLink">Lineup and details</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></p>
+</div>
+
+<script src="../assets/js/qrcode.js?v=fbb6b69b"></script>
+<script src="../assets/js/ticket.js?v=cbf26cc0"></script>
+<script>
+const SB = { url:"https://tgmpgjvvtyhtodltvhbz.supabase.co", key:"sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK" };
+const NO_SHOW = "It's filmed and capped, so we need to know who's coming. If you can't make it, release your ticket and it goes straight to the next person on the waitlist. People who don't show and didn't release their ticket go to the back of the queue for future 6FEET Deep nights.";
+const qs = new URLSearchParams(location.search), CODE = (qs.get("c") || qs.get("code") || "").trim();
+let T = null, ask = qs.get("a");
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+async function rpc(fn, body){
+  const r = await fetch(`${SB.url}/rest/v1/rpc/${fn}`, { method:"POST", headers:{ apikey:SB.key, "Content-Type":"application/json" }, body:JSON.stringify(body) });
+  if(!r.ok) throw new Error(`${fn} ${r.status}: ${await r.text()}`);
+  return r.json();
+}
+const doors = () => new Date(T.doors + "Z");
+const dayLong = () => doors().toLocaleDateString("en-GB", { weekday:"long", day:"numeric", month:"long", timeZone:"UTC" });
+const doorsTime = () => T.doors.slice(11, 16);
+const first = () => esc(T.name.split(" ")[0]);
+
+function ticketBlock(){
+  return `<div class="qr">${SixFD.qrSvg("6FD:" + T.code)}</div>
+    <div class="code">${SixFD.fmtCode(T.code)}</div><div class="admit">Admit one · ${esc(T.name)}</div>
+    <div class="shot"><b>Screenshot this QR code.</b> You'll show it on the door with photo ID (18+).<br><b>One scan only</b>, so don't share it or post it.</div>
+    <button class="btn ghost" id="pdf">Save ticket (PDF)</button>`;
+}
+function notifyBlock(){
+  if(T.notify) return `<div class="notify"><b>You'll hear about the next 6FEET Deep first.</b></div>`;
+  return `<div class="notify"><b>Want first dibs on the next 6FEET Deep?</b><p>We'll email and text you before tickets open to everyone.</p>
+    <button class="btn" id="notify">Notify me about the next one</button></div>`;
+}
+
+function render(){
+  $("ev").innerHTML = `<b>${esc(T.num)}</b> ${esc(T.artist.toUpperCase())}`;
+  $("when").textContent = `${dayLong()} · Doors ${doorsTime()}`;
+  $("pageLink").href = T.page_url;
+  let h = "";
+  if(T.past){
+    h = `<h1>This night has happened.</h1><p>Thanks for being part of 6FEET Deep ${esc(T.num)}.</p>` + notifyBlock();
+  } else if(T.status === "saved" && T.checked_in){
+    h = `<h1>You're in, ${first()}.</h1><p>Enjoy the night.</p>`;
+  } else if(T.status === "saved" && ask === "release"){
+    h = `<h1>Release your ticket?</h1><p>Your QR code will stop working and your spot goes straight to the next person on the waitlist.</p>
+      <button class="btn danger" id="doRelease">Yes, release my ticket</button><button class="btn ghost" id="keep">No, keep my ticket</button>`;
+  } else if(T.status === "saved"){
+    h = (T.promoted ? `<h1>Good news, ${first()}. A spot came free and it's yours.</h1>` : `<h1>${first()}, you're in.</h1>`)
+      + (T.confirmed ? `<div class="ok">✓ Confirmed. See you there</div>`
+                     : `<p>Still coming? One tap tells us.</p><button class="btn" id="doConfirm">Yes, I'm coming</button>`)
+      + ticketBlock()
+      + `<button class="btn ghost" id="askRelease">Can't make it? Release your ticket</button><p class="fine">${NO_SHOW}</p>`;
+  } else if(T.status === "waitlist"){
+    h = `<h1>You're on the waitlist${T.waitlist_pos ? `, number ${T.waitlist_pos}` : ""}.</h1><p>If a ticket comes back before the morning of the night, it's yours and we'll email it straight over.</p>
+      <button class="btn ghost" id="doRelease">Take me off the waitlist</button>`;
+  } else if(T.status === "cancelled" && T.released){
+    h = `<h1>Ticket released.</h1><p>Thanks for letting us know, ${first()}. Your spot has gone to someone else.</p>`
+      + (T.can_undo ? `<button class="btn ghost" id="undo">Undo, I can come after all</button>` : "") + notifyBlock();
+  } else {
+    h = `<h1>No ticket here.</h1><p>This code doesn't have a ticket for this night.</p>`;
+  }
+  $("card").innerHTML = h + `<p class="err" id="err"></p>`;
+  bind();
+}
+
+function busy(b, t){ b.disabled = true; b.textContent = t; }
+async function act(action, btn, label){
+  busy(btn, label);
+  try{
+    const r = await rpc("ticket_action", { p_code:CODE, p_action:action });
+    if(r.result === "past"){ T.past = true; }
+    ask = null; await load(); return r;
+  }catch(e){ console.error("[6FEET Deep] ticket action failed", action, e); btn.disabled = false; $("err").textContent = "Something went wrong. Try again, or message @diff_radio on Instagram."; }
+}
+function bind(){
+  const on = (id, fn) => { const b = $(id); if(b) b.onclick = () => fn(b); };
+  on("doConfirm", b => act("confirm", b, "Confirming..."));
+  on("askRelease", () => { ask = "release"; render(); scrollTo(0,0); });
+  on("keep", () => { ask = null; history.replaceState(null, "", `?c=${CODE}`); render(); });
+  on("doRelease", b => act("release", b, "Releasing..."));
+  on("undo", async b => { const r = await act("undo", b, "Checking..."); if(r && r.result === "waitlisted") $("err").textContent = "Your old spot has gone, so you're at the front of the waitlist."; });
+  on("notify", b => act("notify", b, "Adding you..."));
+  on("pdf", async b => {
+    busy(b, "Making your ticket...");
+    try{ await SixFD.ticketPdf({ num:T.num, artist:T.artist, dateLine:`${doors().toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric",timeZone:"UTC"})} · Doors ${doorsTime()}`, attendee:T.name, code:T.code, file:`6FEET-Deep-${T.num}-${T.artist}-ticket.pdf` }); }
+    catch(e){ console.error("[6FEET Deep] pdf", e); $("err").textContent = "Couldn't make the PDF. Screenshot the QR code instead."; }
+    b.disabled = false; b.textContent = "Save ticket (PDF)";
+  });
+}
+
+async function load(){
+  if(!CODE){ $("card").innerHTML = "<h1>No ticket code.</h1><p>Open the link from your ticket email.</p>"; return; }
+  try{
+    const d = await rpc("ticket_get", { p_code:CODE });
+    if(d.result !== "ok"){ $("card").innerHTML = "<h1>Ticket not found.</h1><p>Check the link in your email, or message @diff_radio on Instagram.</p>"; return; }
+    T = d;
+    // one tap from the "Still coming?" email: confirm straight away (safe to repeat)
+    if(ask === "confirm" && T.status === "saved" && !T.confirmed && !T.past){
+      ask = null; await rpc("ticket_action", { p_code:CODE, p_action:"confirm" }); T.confirmed = true;
+      history.replaceState(null, "", `?c=${CODE}`);
+    }
+    render();
+  }catch(e){ console.error("[6FEET Deep] ticket load failed", e); $("card").innerHTML = "<h1>Couldn't load your ticket.</h1><p>Check your signal and refresh.</p>"; }
+}
+load();
+</script>
+</body>
+</html>

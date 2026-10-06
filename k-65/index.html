@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Save me a spot · 6FEET Deep 002: K-65</title>
-<meta name="description" content="Invite only. Free headline set from K-65 at 6FEET Under, Cardiff. Fri 30 Oct. Every set filmed. Save your spot.">
-<meta property="og:title" content="6FEET Deep 002: K-65 · Save me a spot">
+<title>Claim your free ticket · 6FEET Deep 002: K-65</title>
+<meta name="description" content="Invite only. Free headline set from K-65 at 6FEET Under, Cardiff. Fri 30 Oct. Every set filmed. Claim your free ticket.">
+<meta property="og:title" content="6FEET Deep 002: K-65 · Claim your free ticket">
 <meta property="og:description" content="Invite only. Free entry. Every set filmed. 50 spaces at 6FEET Under, Cardiff, Fri 30 Oct.">
 <meta property="og:image" content="https://6feetdeep.diffradio.com/assets/k65-poster.jpg?v=69d5cd44">
 <meta property="og:url" content="https://6feetdeep.diffradio.com/k-65/">
@@ -152,6 +152,18 @@ input:focus{border-color:var(--orange)}
 .t-code{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;font-size:18px;letter-spacing:.08em;margin-top:12px}
 .t-name{font-size:16px;font-weight:700;margin-top:2px}
 .t-note{font-size:13px!important;color:var(--muted)}
+.nopt{display:flex;gap:14px;align-items:center;padding:16px;border:2px solid var(--orange);border-radius:14px;cursor:pointer;background:rgba(234,90,12,.08);text-transform:none;letter-spacing:0;color:var(--text);font-weight:400}
+.nopt input{width:26px;height:26px;accent-color:var(--orange);flex:none;margin:0}
+.nopt .bell{width:30px;height:30px;flex:none;color:var(--orange)}
+.nopt b{display:block;font-size:17px;line-height:1.2}
+.nopt span span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
+.nonly{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);text-align:center}
+.nonly h3{font-size:18px;margin-bottom:4px}
+.nonly p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.nonly form{display:none;text-align:left;margin-top:12px}
+.nonly.open form{display:block}.nonly.open #nOpen{display:none}
+.nonly .ok{display:none;color:#7ee2a8;font-weight:700;margin-top:10px}
+.manage{display:block;text-align:center;margin-top:14px;font-size:14px;color:var(--muted)}
 .early-msg{margin-top:14px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-size:14px!important;text-align:left}
 .early{text-transform:none;letter-spacing:0;color:var(--text);font-weight:400;display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid #333;border-radius:10px;cursor:pointer}
 .early input{width:20px;height:20px;accent-color:var(--orange);margin-top:2px;flex:none}
@@ -230,10 +242,10 @@ input:focus{border-color:var(--orange)}
     <div class="shade"></div>
     <div class="trailer-cta">
       <div class="meter" data-meter>
-        <div class="meter-top"><span><span class="live-dot"></span><b data-m-label>Spots being saved now</b></span><span data-m-count></span></div>
+        <div class="meter-top"><span><span class="live-dot"></span><b data-m-label>Tickets being claimed now</b></span><span data-m-count></span></div>
         <div class="bar"><i data-m-bar></i></div>
       </div>
-      <a class="btn" href="#save">Save me a spot</a>
+      <a class="btn" href="#save">Claim your free ticket</a>
       <a class="scroll-cue" href="#details" aria-label="Scroll for lineup and details"><span>Lineup &amp; details</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></a>
     </div>
   </section>
@@ -257,9 +269,9 @@ input:focus{border-color:var(--orange)}
       </div>
 
       <div class="meter" data-meter style="margin-bottom:34px">
-        <div class="meter-top"><span><span class="live-dot"></span><b data-m-label>Spots being saved now</b></span><span data-m-count></span></div>
+        <div class="meter-top"><span><span class="live-dot"></span><b data-m-label>Tickets being claimed now</b></span><span data-m-count></span></div>
         <div class="bar"><i data-m-bar></i></div>
-        <p class="meter-note" data-m-note>Spots are going to presenters and their +1s first. Once they're gone, they're gone.</p>
+        <p class="meter-note" data-m-note>Free tickets, capped at 50. Once they're gone, they're gone.</p>
       </div>
 
       <h2>The headliner</h2>
@@ -281,8 +293,8 @@ input:focus{border-color:var(--orange)}
       <!-- Form -->
       <section class="formcard" id="save" aria-live="polite">
         <div id="formWrap">
-          <h2 id="formTitle">Save me a spot</h2>
-          <p class="sub" id="formSub">Takes 20 seconds. Your name goes on the door list.</p>
+          <h2 id="formTitle">Claim your free ticket</h2>
+          <p class="sub" id="formSub">Takes 20 seconds. Your ticket comes straight to your phone and inbox.</p>
           <form id="spotForm" novalidate>
             <div class="field"><label for="f-name">Full name <span class="req">*</span></label><input id="f-name" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="As it'll be on the door"></div>
             <div class="field"><label for="f-email">Email <span class="req">*</span></label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@email.com"></div>
@@ -298,16 +310,30 @@ input:focus{border-color:var(--orange)}
                 <label class="chip"><input type="radio" name="heard" value="no"><span>No</span></label>
               </div>
             </div>
-            <div class="field" data-date="2026-10-17"><label class="early"><input type="checkbox" name="early" value="001-viridity"><span><b>Early list for 001 Viridity too</b><span>Sat 17 Oct. Not a spot yet: you'll hear first before sign-ups open.</span></span></label></div>
+            <div class="field"><label class="nopt"><input type="checkbox" name="notify" value="1"><svg class="bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span><b>Notify me about the next 6FEET Deep</b><span>First dibs on free tickets, by email and text. Unsubscribe any time.</span></span></label></div>
             <div class="hp" aria-hidden="true"><label for="f-web">Website</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
             <p class="err" id="err" role="alert"></p>
-            <button class="btn" id="submitBtn" type="submit">Save me a spot</button>
-            <p class="fine">Free entry, 18+ only (bring ID). Your spot is for you and isn't transferable. The night is filmed, so by coming you're happy to appear in footage. We'll only use your details for this event.</p>
+            <button class="btn" id="submitBtn" type="submit">Claim your free ticket</button>
+            <p class="fine">Free entry, 18+ only (bring ID). Your ticket is for you and isn't transferable. The night is filmed, so by coming you're happy to appear in footage. We'll only use your details for this event, unless you tick Notify me.</p>
           </form>
+          <div class="nonly" id="nonly">
+            <h3 data-n-title>Can't make this one?</h3>
+            <p>Get first dibs on the next 6FEET Deep, by email and text, before tickets open to everyone.</p>
+            <button class="btn ghost" id="nOpen" type="button">Notify me about the next 6FEET Deep</button>
+            <form id="nForm" novalidate>
+              <div class="field"><label for="n-name">Name</label><input id="n-name" type="text" autocomplete="name" maxlength="120"></div>
+              <div class="field"><label for="n-email">Email <span class="req">*</span></label><input id="n-email" type="email" autocomplete="email" maxlength="200" placeholder="you@email.com"></div>
+              <div class="field"><label for="n-phone">Mobile <span style="color:var(--dim);text-transform:none;letter-spacing:0;font-weight:400">for a text when tickets drop</span></label><input id="n-phone" type="tel" autocomplete="tel" maxlength="30" placeholder="07..."></div>
+              <p class="err" id="nErr" role="alert"></p>
+              <button class="btn" id="nBtn" type="submit">Notify me</button>
+              <p class="fine">We'll only contact you about 6FEET Deep and DIFF Radio nights. Unsubscribe any time.</p>
+            </form>
+            <p class="ok" id="nOk">You're on the list. You'll hear about the next 6FEET Deep first.</p>
+          </div>
         </div>
         <div class="done" id="done">
           <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-          <h2 id="doneTitle">Your spot's saved</h2>
+          <h2 id="doneTitle">Your ticket's claimed</h2>
           <p id="doneMsg">You're on the list for 6FEET Deep 002. Fri 30 Oct, doors 17:30, 6FEET Under. Bring ID.</p>
           <div class="shot" id="shotTip" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.2"/></svg><div><b>Screenshot your ticket now</b><span>You'll show this QR code on the door. We've emailed you a copy too.</span></div></div>
           <div class="ticket" id="ticket" hidden>
@@ -319,6 +345,7 @@ input:focus{border-color:var(--orange)}
           <button class="btn solid" id="pdfBtn" type="button" hidden>Save ticket (PDF)</button>
           <p class="t-note" id="tNote" hidden><b>One scan only.</b> Your QR code works once on the door, so don't share it or post it. Bring photo ID (18+).</p>
           <p class="early-msg" id="earlyMsg" hidden></p>
+          <a class="manage" id="manage" href="#" hidden>Can't make it any more? Release your ticket</a>
           <a class="btn" id="calBtn" href="#" download="6feet-deep-002-k-65.ics">Add to calendar</a>
         </div>
       </section>
@@ -331,7 +358,7 @@ input:focus{border-color:var(--orange)}
   </main>
 </div>
 
-<div class="sticky" id="sticky"><a class="btn" href="#save">Save me a spot</a><small data-m-sticky></small></div>
+<div class="sticky" id="sticky"><a class="btn" href="#save">Claim your free ticket</a><small data-m-sticky></small></div>
 
 <script src="../assets/js/qrcode.js?v=fbb6b69b"></script>
 <script src="../assets/js/ticket.js?v=cbf26cc0"></script>
@@ -409,13 +436,13 @@ function renderMeter(){
   if(!state.open){
     label="Sign-ups closed"; count=""; pct=100; note="The list is closed for this one."; sticky="List closed";
   } else if(state.full){
-    label="Fully booked"; count=""; pct=100; note="Every spot's gone. Join the waitlist and we'll message you if one comes back."; sticky="Fully booked · waitlist open";
+    label="Fully booked"; count=""; pct=100; note="Every ticket's gone. Join the waitlist and we'll message you if one comes back."; sticky="Fully booked · waitlist open";
   } else if(s >= cap){
-    label="All 50 spots saved"; count="Final few released"; pct=100; note="All 50 are gone. We've released a final few. Save yours now."; sticky="Final few released";
+    label="All 50 tickets claimed"; count="Final few released"; pct=100; note="All 50 are gone. We've released a final few. Claim yours now."; sticky="Final few released";
   } else {
-    label="Spots being saved now"; count=`<b>${s}</b> / ${cap} saved`; pct=Math.max(4, s/cap*100);
-    note = s >= cap*0.7 ? `Only ${cap-s} left. They're going fast.` : "Spots are going to presenters and their +1s first. Once they're gone, they're gone.";
-    sticky = `${cap-s} of ${cap} spots left`;
+    label="Tickets being claimed now"; count=`<b>${s}</b> / ${cap} claimed`; pct=Math.max(4, s/cap*100);
+    note = s >= cap*0.7 ? `Only ${cap-s} left. They're going fast.` : "Free tickets, capped at 50. Once they're gone, they're gone.";
+    sticky = `${cap-s} of ${cap} tickets left`;
   }
   document.querySelectorAll("[data-m-label]").forEach(e=>e.textContent=label);
   document.querySelectorAll("[data-m-count]").forEach(e=>e.innerHTML=count);
@@ -424,7 +451,7 @@ function renderMeter(){
   document.querySelectorAll("[data-m-sticky]").forEach(e=>e.textContent=sticky);
   if(state.full || !state.open){
     document.getElementById("formTitle").textContent = state.open ? "Join the waitlist" : "Sign-ups closed";
-    document.getElementById("formSub").textContent = state.open ? "Spots sometimes come back. Leave your details and we'll message you first." : "Follow @diff_radio for the next one.";
+    document.getElementById("formSub").textContent = state.open ? "Tickets sometimes come back. Leave your details and we'll message you first." : "Follow @diff_radio for the next one.";
     document.getElementById("submitBtn").textContent = "Join the waitlist";
     document.querySelectorAll(".btn[href='#save']").forEach(b=>b.textContent = state.open ? "Join the waitlist" : "Sign-ups closed");
     if(!state.open) document.getElementById("spotForm").style.display="none";
@@ -479,15 +506,17 @@ form.addEventListener("submit", async (ev) => {
   if(phone.replace(/\D/g,"").length < 6) return fail("Add a mobile number.", "f-phone");
   if(!heard) return fail("Let us know if you've heard of DIFF Radio.");
   const ref = new URLSearchParams(location.search).get("ref");
-  btn.disabled = true; btn.textContent = "Saving...";
+  btn.disabled = true; btn.textContent = "Claiming...";
   try{
     const r = await rpc("save_spot", { p_slug:CONFIG.slug, p_name:name, p_email:email, p_phone:phone,
       p_genres:fd.getAll("genres"), p_heard: heard === "yes", p_ref: ref || "", p_early: fd.getAll("early") });
     showDone(r);
+    if(fd.get("notify")) rpc("notify_me", { p_name:name, p_email:email, p_phone:phone, p_source:CONFIG.slug })
+      .catch(e => console.error("[6FEET Deep] notify failed", e));
   }catch(e){
     console.error("[6FEET Deep] save failed", e);
-    btn.disabled = false; btn.textContent = state.full ? "Join the waitlist" : "Save me a spot";
-    fail("Something went wrong saving your spot. Try again, or message @diff_radio on Instagram.");
+    btn.disabled = false; btn.textContent = state.full ? "Join the waitlist" : "Claim your free ticket";
+    fail("Something went wrong claiming your ticket. Try again, or message @diff_radio on Instagram.");
   }
 });
 function fail(msg, id){ errEl.textContent = msg; if(id) document.getElementById(id).focus(); }
@@ -509,17 +538,18 @@ function alertMsg(t){ const n = document.getElementById("tNote"); n.hidden = fal
 function showDone(r){
   const t = document.getElementById("doneTitle"), m = document.getElementById("doneMsg"), cal = document.getElementById("calBtn");
   if(r.result === "saved" || (r.result === "already" && r.status === "saved")){
-    t.textContent = r.result === "already" ? "You're already on the list" : "Your spot's saved";
+    t.textContent = r.result === "already" ? "You're already on the list" : "Your ticket's claimed";
     if(r.ticket_code){
       showTicket(r.ticket_code, r.name);
+      const mg = document.getElementById("manage"); mg.href = `../ticket/?c=${r.ticket_code}`; mg.hidden = false;
       // email a copy (server only sends once per ticket)
       fetch(`${CONFIG.supabaseUrl}/functions/v1/send-ticket`, { method:"POST", headers:{ "Content-Type":"application/json" }, body:JSON.stringify({ code:r.ticket_code }) })
         .catch(e => console.error("[6FEET Deep] ticket email failed", e));
     }
-    else if(r.result === "already") m.textContent = "That email already has a spot. Use the same mobile number you signed up with to get your ticket again.";
+    else if(r.result === "already") m.textContent = "That email already has a ticket. Use the same mobile number you signed up with to get your ticket again.";
   } else if(r.result === "waitlist" || r.status === "waitlist"){
     t.textContent = "You're on the waitlist";
-    m.textContent = "All spots have gone, but you're next in line. We'll message you if one comes back.";
+    m.textContent = "All tickets have gone, but you're next in line. We'll message you if one comes back.";
     cal.style.display = "none";
   } else if(r.result === "closed"){
     t.textContent = "Sign-ups are closed"; m.textContent = "Follow @diff_radio for the next one."; cal.style.display="none";
@@ -534,6 +564,23 @@ function showDone(r){
   document.getElementById("save").scrollIntoView({block:"start"});
   loadStatus();
 }
+
+/* ---- notify me about the next 6FEET Deep (no ticket needed) ---- */
+(function(){
+  const box = document.getElementById("nonly"), f = document.getElementById("nForm"), err = document.getElementById("nErr"), b = document.getElementById("nBtn");
+  document.getElementById("nOpen").onclick = () => { box.classList.add("open"); document.getElementById("n-email").focus(); };
+  f.addEventListener("submit", async ev => {
+    ev.preventDefault(); err.textContent = "";
+    const email = document.getElementById("n-email").value.trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.textContent = "That email doesn't look right."; return; }
+    b.disabled = true; b.textContent = "Adding you...";
+    try{
+      const r = await rpc("notify_me", { p_name:document.getElementById("n-name").value, p_email:email, p_phone:document.getElementById("n-phone").value, p_source:CONFIG.slug });
+      if(r.result !== "ok") throw new Error(r.result);
+      f.style.display = "none"; document.getElementById("nOk").style.display = "block";
+    }catch(e){ console.error("[6FEET Deep] notify failed", e); b.disabled = false; b.textContent = "Notify me"; err.textContent = "Something went wrong. Try again, or message @diff_radio on Instagram."; }
+  });
+})();
 </script>
 </body>
 </html>

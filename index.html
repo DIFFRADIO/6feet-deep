@@ -79,9 +79,9 @@ h1 .six{color:var(--red)}
       <div class="body">
         <span class="num">002</span><h2>K-65</h2>
         <p class="date">Fri 30 Oct · Doors 17:30 · Electro, breaks, techno</p>
-        <div class="meter-top"><b data-label>Spots being saved</b><span data-count></span></div>
+        <div class="meter-top"><b data-label>Tickets being claimed</b><span data-count></span></div>
         <div class="bar"><i data-bar></i></div>
-        <span class="btn" data-btn>Save me a spot</span>
+        <span class="btn" data-btn>Claim your free ticket</span>
       </div>
     </a>
   </div>
@@ -98,7 +98,7 @@ document.querySelectorAll(".ev").forEach(async card => {
     const s = d.saved, q = sel => card.querySelector(sel);
     if(!d.is_open){ q("[data-label]").textContent="Sign-ups closed"; q("[data-bar]").style.width="100%"; q("[data-btn]").textContent="Closed"; return; }
     if(d.full){ q("[data-label]").textContent="Fully booked"; q("[data-bar]").style.width="100%"; q("[data-btn]").textContent="Join the waitlist"; return; }
-    if(s >= CAP){ q("[data-label]").textContent="All 50 saved"; q("[data-count]").textContent="Final few released"; q("[data-bar]").style.width="100%"; return; }
+    if(s >= CAP){ q("[data-label]").textContent = q("[data-label]").textContent.startsWith("Tickets") ? "All 50 claimed" : "All 50 saved"; q("[data-count]").textContent="Final few released"; q("[data-bar]").style.width="100%"; return; }
     q("[data-count]").innerHTML = `<b>${s}</b> / ${CAP}`;
     q("[data-bar]").style.width = Math.max(4, s/CAP*100) + "%";
   }catch(e){ console.error("[6FEET Deep] status failed", card.dataset.slug, e); }
