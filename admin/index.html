@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · 6FEET Deep</title>
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="../assets/logo.png?v=8ff0ba51">
+<style>
+:root{--bg:#000;--panel:#0e0e0e;--panel2:#151515;--line:#262626;--text:#fff;--muted:#a3a3a3;--dim:#6b6b6b;--orange:#ea5a0c;--red:#e3161b;--ok:#3fbf7f;--warn:#e0a400}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;font-size:15px}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 16px 60px}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.top img{width:34px}.top h1{font-size:17px;font-weight:800}.top h1 span{color:var(--red)}
+.top .sp{flex:1}.top small{color:var(--dim);font-size:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.auth{max-width:400px;margin:8vh auto 0}
+.auth h2{font-size:20px;margin-bottom:6px}.auth p{color:var(--muted);font-size:14px;line-height:1.5}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#cfcfcf;margin:14px 0 6px}
+input,select{width:100%;height:46px;padding:0 12px;border-radius:9px;border:1px solid #333;background:#000;font-size:16px;outline:none}
+input:focus,select:focus{border-color:var(--orange)}
+input.code{letter-spacing:.4em;font-family:ui-monospace,Menlo,monospace;font-size:22px;text-align:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:0;border-radius:9px;background:var(--orange);color:#000;font-weight:800;cursor:pointer}
+.btn.full{width:100%;margin-top:16px;min-height:50px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid #444}
+.btn.sm{min-height:34px;padding:0 12px;font-size:13px}
+.btn:disabled{opacity:.6}
+.err{color:#ff7b7b;font-size:14px;margin-top:10px;min-height:1em}
+.qr{background:#fff;border-radius:12px;padding:12px;width:220px;margin:14px auto}.qr img{display:block;width:100%}
+.secret{font-family:ui-monospace,Menlo,monospace;font-size:13px;word-break:break-all;background:#000;border:1px solid #333;border-radius:8px;padding:10px;color:#ddd;margin-top:6px}
+.hide{display:none!important}
+.grid{display:grid;gap:14px}
+@media (min-width:860px){.grid.two{grid-template-columns:1fr 1fr}}
+.ev h3{font-size:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.ev h3 b{color:var(--orange)}
+.pill{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px}
+.pill.open{background:#123d27;color:#7ee2a8}.pill.closed{background:#3d1414;color:#ff8a8a}
+.ev .sub{color:var(--muted);font-size:13px;margin-top:4px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.tile{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}
+.tile b{display:block;font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.tile.hero{grid-column:span 2}.tile.hero b{font-size:34px}
+.tile .warnico{color:var(--warn)}
+.cap{height:8px;border-radius:8px;background:#222;overflow:hidden;margin-top:12px}
+.cap i{display:block;height:100%;background:var(--orange);border-radius:8px}
+.capnote{font-size:12px;color:var(--muted);margin-top:6px}
+.ev .act{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+h4{font-size:14px;margin-bottom:10px;color:#ddd}
+.bars{display:grid;gap:6px}
+.bar{display:grid;grid-template-columns:64px 1fr 34px;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.bar .t{height:14px;background:#1d1d1d;border-radius:4px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--orange);border-radius:0 4px 4px 0;min-width:2px}
+.bar em{font-style:normal;color:var(--text);text-align:right;font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--muted);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding:8px 8px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;background:var(--panel)}
+td{padding:9px 8px;border-bottom:1px solid #1c1c1c;vertical-align:top}
+td a{color:var(--text)}
+tr:hover td{background:#121212}
+.tbl{overflow:auto;max-height:70vh;border:1px solid var(--line);border-radius:10px}
+.st{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:3px 7px;border-radius:6px;white-space:nowrap}
+.st.saved{background:#123d27;color:#7ee2a8}.st.waitlist{background:#333;color:#ddd}.st.cancelled{background:#3d1414;color:#ff8a8a}.st.early{background:#2a2a14;color:#e6d77a}
+.muted{color:var(--muted)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 12px}
+.tabs button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;color:var(--muted)}
+.tabs button.on{background:#fff;color:#000;border-color:#fff}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.filters input,.filters select{height:40px;width:auto;flex:1 1 180px;font-size:14px}
+.count{font-size:13px;color:var(--muted);margin:0 0 8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="../assets/logo.png?v=8ff0ba51" alt=""><h1><span>6FEET</span> DEEP · Admin</h1><div class="sp"></div>
+    <small id="who"></small><button class="btn ghost sm hide" id="refresh">Refresh</button><button class="btn ghost sm hide" id="out">Sign out</button></div>
+
+  <!-- 1. password -->
+  <div class="card auth hide" id="vLogin">
+    <h2>Sign in</h2><p>Admin only. You'll need your password and the code from your authenticator app.</p>
+    <form id="fLogin"><label for="em">Email</label><input id="em" type="email" autocomplete="username" required>
+      <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required>
+      <button class="btn full" id="bLogin">Continue</button><p class="err" id="eLogin"></p></form>
+  </div>
+
+  <!-- 2a. first time: set up authenticator -->
+  <div class="card auth hide" id="vEnroll">
+    <h2>Set up two-factor sign-in</h2>
+    <p>Open an authenticator app (Google Authenticator, Microsoft Authenticator, 1Password or Authy), add an account and scan this code. Then type the 6-digit code it shows.</p>
+    <div class="qr"><img id="qr" alt="Authenticator QR code"></div>
+    <p>Can't scan? Enter this key instead:</p><div class="secret" id="secret"></div>
+    <form id="fEnroll"><label for="c1">6-digit code</label><input id="c1" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required>
+      <button class="btn full">Turn on two-factor</button><p class="err" id="eEnroll"></p></form>
+  </div>
+
+  <!-- 2b. every time: code -->
+  <div class="card auth hide" id="vCode">
+    <h2>Enter your code</h2><p>Open your authenticator app and type the 6-digit code for 6FEET Deep.</p>
+    <form id="fCode"><label for="c2">6-digit code</label><input id="c2" class="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required>
+      <button class="btn full">Verify</button><p class="err" id="eCode"></p></form>
+  </div>
+
+  <!-- 3. first time: change the temporary password -->
+  <div class="card auth hide" id="vPw">
+    <h2>Choose a new password</h2><p>Replace the temporary password you were given. At least 12 characters.</p>
+    <form id="fPw"><label for="np">New password</label><input id="np" type="password" autocomplete="new-password" minlength="12" required>
+      <label for="np2">Type it again</label><input id="np2" type="password" autocomplete="new-password" minlength="12" required>
+      <button class="btn full">Save password</button><p class="err" id="ePw"></p></form>
+  </div>
+
+  <!-- 4. dashboard -->
+  <div class="hide" id="vDash">
+    <div class="grid two" id="events"></div>
+    <div class="grid two" style="margin-top:14px">
+      <div class="card"><h4>Sign-ups per day (last 14 days, both nights)</h4><div class="bars" id="daily"></div></div>
+      <div class="card"><h4>Where sign-ups came from</h4><div class="tbl" style="max-height:260px"><table><thead><tr><th>Link tag (?ref=)</th><th>Night</th><th style="text-align:right">Sign-ups</th></tr></thead><tbody id="refs"></tbody></table></div>
+        <h4 style="margin-top:16px">What ticket holders listen to</h4><div class="bars" id="genres"></div></div>
+    </div>
+
+    <div class="tabs" id="tabs"><button data-t="all" class="on">All sign-ups</button><button data-t="001-viridity">001 Viridity</button><button data-t="002-k65">002 K-65</button><button data-t="notify">Notify list</button></div>
+    <div class="card">
+      <div class="filters"><input id="q" placeholder="Search name, email, mobile or ref"><select id="fs"><option value="">Every status</option><option value="saved">Has ticket</option><option value="waitlist">Waitlist</option><option value="cancelled">Released</option><option value="early">Early list</option></select>
+        <button class="btn sm" id="csv">Download CSV</button></div>
+      <p class="count" id="cnt"></p>
+      <div class="tbl"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+    </div>
+    <p class="muted" style="font-size:12px;margin-top:14px">Updates every minute. Counter = what the public page shows (out of 50); tickets = real holders (hard cap 75).</p>
+  </div>
+</div>
+
+<script src="../assets/js/supabase.js?v=d3846343"></script>
+<script>
+const sb = supabase.createClient("https://tgmpgjvvtyhtodltvhbz.supabase.co", "sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK", { auth:{ persistSession:true, autoRefreshToken:true } });
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const VIEWS = ["vLogin","vEnroll","vCode","vPw","vDash"];
+function show(v){ VIEWS.forEach(x => $(x).classList.toggle("hide", x !== v)); ["refresh","out"].forEach(x => $(x).classList.toggle("hide", v === "vLogin")); }
+const busy = (f, on, txt) => { const b = f.querySelector("button"); b.disabled = on; if(txt) b.textContent = txt; };
+const fail = (id, e, msg) => { console.error("[admin]", e); $(id).textContent = msg || (e && e.message) || "Something went wrong."; };
+
+let factorId = null, timer = null;
+async function route(){
+  const { data:{ session } } = await sb.auth.getSession();
+  if(!session){ show("vLogin"); return; }
+  $("who").textContent = session.user.email;
+  const { data:aal, error } = await sb.auth.mfa.getAuthenticatorAssuranceLevel();
+  if(error){ fail("eLogin", error); show("vLogin"); return; }
+  if(aal.currentLevel === "aal2"){
+    if(session.user.user_metadata && session.user.user_metadata.must_change_password){ show("vPw"); return; }
+    show("vDash"); load(); clearInterval(timer); timer = setInterval(load, 60000); return;
+  }
+  const { data:f } = await sb.auth.mfa.listFactors();
+  const verified = (f.all || []).find(x => x.factor_type === "totp" && x.status === "verified");
+  if(verified){ factorId = verified.id; show("vCode"); $("c2").value = ""; $("c2").focus(); return; }
+  // first time: clear any half-finished setup, then show a new QR code
+  for(const x of (f.all || []).filter(x => x.status !== "verified")) await sb.auth.mfa.unenroll({ factorId:x.id });
+  const { data:en, error:ee } = await sb.auth.mfa.enroll({ factorType:"totp", friendlyName:"6FEET Deep admin" });
+  if(ee){ show("vEnroll"); fail("eEnroll", ee); return; }
+  factorId = en.id; $("qr").src = en.totp.qr_code; $("secret").textContent = en.totp.secret; show("vEnroll");
+}
+
+$("fLogin").onsubmit = async ev => { ev.preventDefault(); $("eLogin").textContent = ""; busy(ev.target, true, "Checking...");
+  const { error } = await sb.auth.signInWithPassword({ email:$("em").value.trim(), password:$("pw").value });
+  busy(ev.target, false, "Continue");
+  if(error) return fail("eLogin", error, "Wrong email or password.");
+  $("pw").value = ""; route(); };
+async function verify(form, input, errId, label){
+  $(errId).textContent = ""; busy(form, true, "Checking...");
+  const { error } = await sb.auth.mfa.challengeAndVerify({ factorId, code:$(input).value.replace(/\D/g,"") });
+  busy(form, false, label);
+  if(error) return fail(errId, error, "That code didn't work. Wait for a new one and try again.");
+  route();
+}
+$("fEnroll").onsubmit = ev => { ev.preventDefault(); verify(ev.target, "c1", "eEnroll", "Turn on two-factor"); };
+$("fCode").onsubmit = ev => { ev.preventDefault(); verify(ev.target, "c2", "eCode", "Verify"); };
+$("fPw").onsubmit = async ev => { ev.preventDefault(); $("ePw").textContent = "";
+  if($("np").value.length < 12) return fail("ePw", null, "Use at least 12 characters.");
+  if($("np").value !== $("np2").value) return fail("ePw", null, "Those don't match.");
+  busy(ev.target, true, "Saving...");
+  const { error } = await sb.auth.updateUser({ password:$("np").value, data:{ must_change_password:false } });
+  busy(ev.target, false, "Save password");
+  if(error) return fail("ePw", error);
+  await sb.auth.refreshSession(); route(); };
+$("out").onclick = async () => { clearInterval(timer); await sb.auth.signOut(); location.reload(); };
+$("refresh").onclick = () => load();
+
+/* ---------- dashboard ---------- */
+let OV = null, ROWS = [], NOTIFY = [], tab = "all";
+const fmtDT = d => d ? new Date(d).toLocaleString("en-GB", { day:"numeric", month:"short", hour:"2-digit", minute:"2-digit" }) : "";
+const LABEL = { saved:"Ticket", waitlist:"Waitlist", cancelled:"Released", early:"Early list" };
+
+async function load(){
+  try{
+    const [o, s, n] = await Promise.all([sb.rpc("admin_overview"), sb.rpc("admin_signups", { p_slug:null }), sb.rpc("admin_notify_list")]);
+    for(const r of [o, s, n]) if(r.error) throw r.error;
+    OV = o.data; ROWS = s.data || []; NOTIFY = n.data || [];
+    renderOverview(); renderTable();
+  }catch(e){
+    console.error("[admin] load failed", e);
+    if(String(e.message || "").includes("not authorised") || e.code === "42501"){ route(); return; }
+    $("cnt").textContent = "Couldn't load data: " + (e.message || e);
+  }
+}
+function renderOverview(){
+  $("events").innerHTML = (OV.events || []).map(e => {
+    const pct = Math.min(100, Math.round(e.saved / e.hard_cap * 100));
+    return `<div class="card ev"><h3><b>${esc(e.slug.slice(0,3))}</b> ${esc(e.artist)} <span class="pill ${e.is_open ? "open" : "closed"}">${e.is_open ? "Sign-ups open" : "Closed"}</span></h3>
+      <div class="sub">${new Date(e.doors + "Z").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",timeZone:"UTC"})} · doors ${esc(String(e.doors).slice(11,16))}</div>
+      <div class="tiles">
+        <div class="tile hero"><b>${e.saved}<small class="muted" style="font-size:16px"> / ${e.hard_cap}</small></b><span>Tickets (real)</span></div>
+        <div class="tile"><b>${e.shown}<small class="muted" style="font-size:13px"> / ${e.display_cap}</small></b><span>Public counter</span></div>
+        <div class="tile"><b>${e.today}</b><span>Today</span></div>
+        <div class="tile"><b>${e.confirmed}</b><span>Confirmed</span></div>
+        <div class="tile"><b>${e.waitlist}</b><span>Waitlist</span></div>
+        <div class="tile"><b>${e.released}</b><span>Released</span></div>
+        <div class="tile"><b>${e.checked_in}</b><span>Checked in</span></div>
+      </div>
+      <div class="cap" title="${e.saved} of ${e.hard_cap} real places"><i style="width:${pct}%"></i></div>
+      <div class="capnote">${e.hard_cap - e.saved} real places left · ${e.heard_yes} of ${e.saved} had heard of DIFF Radio${e.early ? ` · ${e.early} on early list` : ""}${e.email_errors ? ` · <span class="warnico">⚠ ${e.email_errors} email problem${e.email_errors > 1 ? "s" : ""}</span>` : ""}</div>
+      <div class="act"><button class="btn ghost sm" data-open="${esc(e.slug)}" data-v="${e.is_open ? 0 : 1}">${e.is_open ? "Close sign-ups" : "Re-open sign-ups"}</button>
+        <a class="btn ghost sm" href="../${e.slug === "002-k65" ? "k-65" : "viridity"}/" target="_blank" rel="noopener" style="text-decoration:none">View page</a></div></div>`;
+  }).join("");
+  // sign-ups per day (one series: total across both nights)
+  const days = []; const now = new Date();
+  for(let i = 13; i >= 0; i--){ const d = new Date(now); d.setDate(d.getDate() - i); days.push(d.toLocaleDateString("en-CA")); }
+  const per = {}; (OV.daily || []).forEach(r => { per[r.day] = (per[r.day] || 0) + r.n; });
+  const max = Math.max(1, ...days.map(d => per[d] || 0));
+  $("daily").innerHTML = days.map(d => { const n = per[d] || 0;
+    return `<div class="bar" title="${n} sign-up${n === 1 ? "" : "s"} on ${d}"><span>${new Date(d + "T12:00").toLocaleDateString("en-GB",{weekday:"short",day:"numeric"})}</span><div class="t">${n ? `<i style="width:${n / max * 100}%"></i>` : ""}</div><em>${n}</em></div>`; }).join("");
+  $("refs").innerHTML = (OV.refs || []).map(r => `<tr><td>${esc(r.ref)}</td><td class="muted">${esc(r.event_slug.slice(0,3))}</td><td style="text-align:right">${r.n}</td></tr>`).join("") || `<tr><td colspan="3" class="muted">No sign-ups yet</td></tr>`;
+  const g = (OV.genres || []).slice(0, 10), gm = Math.max(1, ...g.map(x => x.n));
+  $("genres").innerHTML = g.map(x => `<div class="bar" title="${x.n} ticket holders"><span>${esc(x.genre)}</span><div class="t"><i style="width:${x.n / gm * 100}%"></i></div><em>${x.n}</em></div>`).join("") || `<p class="muted">No data yet</p>`;
+  $("tabs").querySelector('[data-t="notify"]').textContent = `Notify list (${OV.notify})`;
+}
+$("events").onclick = async ev => {
+  const b = ev.target.closest("[data-open]"); if(!b) return;
+  const open = b.dataset.v === "1";
+  if(!confirm(open ? "Re-open sign-ups for this night?" : "Close sign-ups for this night? The page will stop taking new sign-ups.")) return;
+  b.disabled = true;
+  const { error } = await sb.rpc("admin_set_open", { p_slug:b.dataset.open, p_open:open });
+  if(error){ alert("Couldn't change it: " + error.message); b.disabled = false; return; }
+  load();
+};
+
+function currentRows(){
+  const q = $("q").value.trim().toLowerCase(), st = $("fs").value;
+  if(tab === "notify") return NOTIFY.filter(r => !q || [r.name, r.email, r.phone, r.source].join(" ").toLowerCase().includes(q));
+  return ROWS.filter(r => (tab === "all" || r.slug === tab) && (!st || r.status === st) &&
+    (!q || [r.name, r.email, r.phone, r.ref].join(" ").toLowerCase().includes(q)));
+}
+function renderTable(){
+  $("fs").classList.toggle("hide", tab === "notify");
+  const rows = currentRows();
+  if(tab === "notify"){
+    $("th").innerHTML = "<tr><th>Joined</th><th>Name</th><th>Email</th><th>Mobile</th><th>From</th><th>Status</th></tr>";
+    $("tb").innerHTML = rows.map(r => `<tr><td class="muted">${fmtDT(r.created)}</td><td>${esc(r.name)}</td><td><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td><td>${esc(r.phone)}</td><td class="muted">${esc(r.source)}</td><td>${r.unsubscribed ? '<span class="st cancelled">Unsubscribed</span>' : '<span class="st saved">Subscribed</span>'}</td></tr>`).join("");
+    $("cnt").textContent = `${rows.length} people on the notify list`;
+    return;
+  }
+  $("th").innerHTML = "<tr><th>Signed up</th><th>Night</th><th>Name</th><th>Email</th><th>Mobile</th><th>Status</th><th>Ref</th><th>Heard of DIFF</th><th>Ticket email</th><th>Confirmed</th><th>Checked in</th></tr>";
+  $("tb").innerHTML = rows.map(r => `<tr><td class="muted">${fmtDT(r.created)}</td><td class="muted">${esc((r.slug || "").slice(0,3))}</td><td>${esc(r.name)}</td><td><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td><td><a href="tel:${esc(r.phone)}">${esc(r.phone)}</a></td>
+    <td><span class="st ${esc(r.status)}">${LABEL[r.status] || esc(r.status)}</span></td><td class="muted">${esc(r.ref)}</td><td>${r.heard ? "Yes" : "No"}</td>
+    <td>${r.email_error ? '<span class="warnico" title="' + esc(r.email_error) + '">⚠ Failed</span>' : r.emailed ? "Sent" : '<span class="muted">-</span>'}</td>
+    <td>${r.confirmed ? "Yes" : '<span class="muted">-</span>'}</td><td>${r.checked_in ? fmtDT(r.checked_in) : '<span class="muted">-</span>'}</td></tr>`).join("") || `<tr><td colspan="11" class="muted">No sign-ups match</td></tr>`;
+  $("cnt").textContent = `${rows.length} sign-up${rows.length === 1 ? "" : "s"} shown`;
+}
+$("tabs").onclick = ev => { const b = ev.target.closest("button"); if(!b) return; tab = b.dataset.t;
+  [...$("tabs").children].forEach(x => x.classList.toggle("on", x === b)); renderTable(); };
+$("q").oninput = renderTable; $("fs").onchange = renderTable;
+$("csv").onclick = () => {
+  const rows = currentRows();
+  const cols = tab === "notify" ? ["created","name","email","phone","source","unsubscribed"]
+    : ["created","slug","name","email","phone","status","ref","heard","genres","code","emailed","email_error","confirmed","released","promoted","checked_in"];
+  const cell = v => { v = Array.isArray(v) ? v.join("; ") : (v ?? ""); v = String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  const csv = [cols.join(","), ...rows.map(r => cols.map(c => cell(r[c])).join(","))].join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type:"text/csv" }));
+  a.download = `6feet-deep-${tab}-${new Date().toISOString().slice(0,10)}.csv`; a.click(); URL.revokeObjectURL(a.href);
+};
+
+sb.auth.onAuthStateChange(ev => { if(ev === "SIGNED_OUT") show("vLogin"); });
+route();
+</script>
+</body>
+</html>
