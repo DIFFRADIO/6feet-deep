@@ -556,7 +556,7 @@ function renderMeter(){
   } else if(state.full){
     label="Fully booked"; count=""; pct=100; note="Every ticket's gone. Join the waitlist and we'll message you if one comes back."; sticky="Fully booked · waitlist open";
   } else if(s >= cap){
-    label="All 50 tickets claimed"; count="Final few released"; pct=100; note="All 50 are gone. We've released a final few. Claim yours now."; sticky="Final few released";
+    label=`All ${cap} tickets claimed`; count="Final few released"; pct=100; note=`All ${cap} are gone. We've released a final few. Claim yours now.`; sticky="Final few released";
   } else {
     label="Tickets being claimed now"; count=`<b>${s}</b> / ${cap} claimed`; pct=Math.max(4, s/cap*100);
     note = s >= cap*0.7 ? `Only ${cap-s} left. They're going fast.` : "Free tickets, capped at 50. Once they're gone, they're gone.";
@@ -578,7 +578,7 @@ function renderMeter(){
 async function loadStatus(){
   try{
     const d = await rpc("spot_status", { p_slug:CONFIG.slug });
-    if(d){ state = { saved:d.saved, full:d.full, open:d.is_open }; renderMeter(); }
+    if(d){ if(d.display_cap) CONFIG.displayCap = d.display_cap; state = { saved:d.saved, full:d.full, open:d.is_open }; renderMeter(); }
   }catch(e){ console.error("[6FEET Deep] status failed", e); }
 }
 loadStatus(); setInterval(loadStatus, 30000);
@@ -666,7 +666,7 @@ function showTicket(code, attendee){
 function showMates(name){
   const T = CONFIG.ticket, box = document.getElementById("mates");
   SixFD.bindMates(box, { url: SixFD.mateLink(location.origin + location.pathname, name),
-    text: `I've got a free ticket to 6FEET Deep ${T.num}: ${T.artist} at 6FEET Under, Cardiff (${T.dateLine}). Invite only, every set filmed, capped at 50. Get yours before they go:` });
+    text: `I've got a free ticket to 6FEET Deep ${T.num}: ${T.artist} at 6FEET Under, Cardiff (${T.dateLine}). Invite only, every set filmed, capped at ${CONFIG.displayCap}. Get yours before they go:` });
   box.hidden = false;
 }
 function alertMsg(t){ const n = document.getElementById("tNote"); n.hidden = false; n.textContent = t; }

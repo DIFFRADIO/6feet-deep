@@ -11,7 +11,7 @@
 <title>6FEET Deep · DIFF Radio</title>
 <meta name="description" content="One artist. One hour. A closed room. An invite-only filmed series at 6FEET Under, Cardiff.">
 <meta property="og:title" content="6FEET Deep · DIFF Radio">
-<meta property="og:description" content="Invite-only filmed nights at 6FEET Under, Cardiff. Free tickets, 50 spaces, every set filmed. 001 Viridity Sat 17 Oct · 002 K-65 Fri 30 Oct.">
+<meta property="og:description" content="Invite-only filmed nights at 6FEET Under, Cardiff. Free tickets, limited spaces, every set filmed. 001 Viridity Sat 17 Oct · 002 K-65 Fri 30 Oct.">
 <meta property="og:image" content="https://6feetdeep.diffradio.com/assets/viridity-share.jpg?v=3">
 <meta property="og:image:secure_url" content="https://6feetdeep.diffradio.com/assets/viridity-share.jpg?v=3">
 <meta property="og:image:type" content="image/jpeg">
@@ -77,7 +77,7 @@ h1 .six{color:var(--red)}
   <p class="tagline">One artist. One hour.<br>A closed room.</p>
   <p class="intro">An invite-only filmed series at 6FEET Under, the basement club in the centre of Cardiff. Venue shut, no walk-ins, and a room full of the people who make Cardiff's underground scene.</p>
   <a href="what-is-6feet-deep/" style="display:inline-flex;gap:8px;margin:-8px 0 22px;padding:9px 15px;border:1px solid var(--orange);border-radius:999px;color:var(--orange);font-size:14px;font-weight:700">What is 6FEET Deep? →</a>
-  <div class="tags"><span class="tag hot">Free entry</span><span class="tag hot">50 spaces each</span><span class="tag">Every set filmed</span><span class="tag">No walk-ins</span><span class="tag">18+</span></div>
+  <div class="tags"><span class="tag hot">Free entry</span><span class="tag hot">Limited spaces</span><span class="tag">Every set filmed</span><span class="tag">No walk-ins</span><span class="tag">18+</span></div>
 
   <p class="kicker">Upcoming</p>
   <div class="events">
@@ -117,16 +117,16 @@ h1 .six{color:var(--red)}
   <div class="foot"><span>6FEET Under · 94 St Mary's St, Cardiff CF10 1DX</span><span><a href="https://diffradio.com">diffradio.com</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></span></div>
 </div>
 <script>
-const SB = "https://tgmpgjvvtyhtodltvhbz.supabase.co", KEY = "sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK", CAP = 50;
+const SB = "https://tgmpgjvvtyhtodltvhbz.supabase.co", KEY = "sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK", CAP0 = 50;
 document.querySelectorAll(".ev[data-slug]").forEach(async card => {
   try{
     const r = await fetch(`${SB}/rest/v1/rpc/spot_status`, {method:"POST", headers:{apikey:KEY,"Content-Type":"application/json"}, body:JSON.stringify({p_slug:card.dataset.slug})});
     if(!r.ok) throw new Error(r.status + " " + await r.text());
     const d = await r.json(); if(!d) return;
-    const s = d.saved, q = sel => card.querySelector(sel);
+    const s = d.saved, CAP = d.display_cap || CAP0, q = sel => card.querySelector(sel);
     if(!d.is_open){ q("[data-label]").textContent="Sign-ups closed"; q("[data-bar]").style.width="100%"; q("[data-btn]").textContent="Closed"; return; }
     if(d.full){ q("[data-label]").textContent="Fully booked"; q("[data-bar]").style.width="100%"; q("[data-btn]").textContent="Join the waitlist"; return; }
-    if(s >= CAP){ q("[data-label]").textContent = q("[data-label]").textContent.startsWith("Tickets") ? "All 50 claimed" : "All 50 saved"; q("[data-count]").textContent="Final few released"; q("[data-bar]").style.width="100%"; return; }
+    if(s >= CAP){ q("[data-label]").textContent = q("[data-label]").textContent.startsWith("Tickets") ? `All ${CAP} claimed` : `All ${CAP} saved`; q("[data-count]").textContent="Final few released"; q("[data-bar]").style.width="100%"; return; }
     q("[data-count]").innerHTML = `<b>${s}</b> / ${CAP}`;
     q("[data-bar]").style.width = Math.max(4, s/CAP*100) + "%";
   }catch(e){ console.error("[6FEET Deep] status failed", card.dataset.slug, e); }

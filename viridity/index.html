@@ -11,7 +11,7 @@
 <title>Save me a spot · 6FEET Deep 001: Viridity</title>
 <meta name="description" content="Invite only. Free headline set from Viridity at 6FEET Under, Cardiff. Sat 17 Oct. Every set filmed. Save your spot.">
 <meta property="og:title" content="6FEET Deep 001: Viridity · Save me a spot">
-<meta property="og:description" content="Sat 17 Oct · 6FEET Under, Cardiff. Free tickets, only 50 spaces, every set filmed. Save your spot before they go.">
+<meta property="og:description" content="Sat 17 Oct · 6FEET Under, Cardiff. Free tickets, only 65 spaces, every set filmed. Save your spot before they go.">
 <meta property="og:image" content="https://6feetdeep.diffradio.com/assets/viridity-share.jpg?v=f468c142">
 <meta property="og:image:secure_url" content="https://6feetdeep.diffradio.com/assets/viridity-share.jpg?v=f468c142">
 <meta property="og:image:type" content="image/jpeg">
@@ -336,7 +336,7 @@ input:focus{border-color:var(--orange)}
 
       <div class="tags">
         <span class="tag hot">Free entry</span>
-        <span class="tag hot">50 spaces</span>
+        <span class="tag hot">65 spaces</span>
         <span class="tag">Every set filmed</span>
         <span class="tag hot">Arrive by 17:30</span>
         <span class="tag">No walk-ins</span>
@@ -463,7 +463,7 @@ const CONFIG = {
   slug: "001-viridity",
   ticket: {"num": "001", "artist": "Viridity", "dateLine": "Sat 17 Oct 2026 \u00b7 Doors 17:30"},
   others: [{"slug": "002-k65", "label": "002 K-65"}],
-  displayCap: 50,
+  displayCap: 65,
   lastEntryUtc: "2026-10-17T18:00:00+01:00"
 };
 const GENRES = ["Drum & Bass","Jungle","House","Techno","UK Garage","Dubstep","Bass / 140","Breaks","Grime","Disco","Trance","Ambient"];
@@ -565,7 +565,7 @@ function renderMeter(){
   } else if(state.full){
     label="Fully booked"; count=""; pct=100; note="Every spot's gone. Join the waitlist and we'll message you if one comes back."; sticky="Fully booked · waitlist open";
   } else if(s >= cap){
-    label="All 50 spots saved"; count="Final few released"; pct=100; note="All 50 are gone. We've released a final few. Save yours now."; sticky="Final few released";
+    label=`All ${cap} spots saved`; count="Final few released"; pct=100; note=`All ${cap} are gone. We've released a final few. Save yours now.`; sticky="Final few released";
   } else {
     label="Spots being saved now"; count=`<b>${s}</b> / ${cap} saved`; pct=Math.max(4, s/cap*100);
     note = s >= cap*0.7 ? `Only ${cap-s} left. They're going fast.` : "Spots are going to presenters and their +1s first. Once they're gone, they're gone.";
@@ -587,7 +587,7 @@ function renderMeter(){
 async function loadStatus(){
   try{
     const d = await rpc("spot_status", { p_slug:CONFIG.slug });
-    if(d){ state = { saved:d.saved, full:d.full, open:d.is_open }; renderMeter(); }
+    if(d){ if(d.display_cap) CONFIG.displayCap = d.display_cap; state = { saved:d.saved, full:d.full, open:d.is_open }; renderMeter(); }
   }catch(e){ console.error("[6FEET Deep] status failed", e); }
 }
 loadStatus(); setInterval(loadStatus, 30000);
@@ -675,7 +675,7 @@ function showTicket(code, attendee){
 function showMates(name){
   const T = CONFIG.ticket, box = document.getElementById("mates");
   SixFD.bindMates(box, { url: SixFD.mateLink(location.origin + location.pathname, name),
-    text: `I've got a free ticket to 6FEET Deep ${T.num}: ${T.artist} at 6FEET Under, Cardiff (${T.dateLine}). Invite only, every set filmed, capped at 50. Get yours before they go:` });
+    text: `I've got a free ticket to 6FEET Deep ${T.num}: ${T.artist} at 6FEET Under, Cardiff (${T.dateLine}). Invite only, every set filmed, capped at ${CONFIG.displayCap}. Get yours before they go:` });
   box.hidden = false;
 }
 function alertMsg(t){ const n = document.getElementById("tNote"); n.hidden = false; n.textContent = t; }
