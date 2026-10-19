@@ -42,10 +42,11 @@ a{color:inherit;text-decoration:none}
 .back:hover{border-color:var(--orange);color:var(--orange)}
 /* hero */
 .hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 54%}
 .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,#000 4%,rgba(0,0,0,.55) 38%,rgba(0,0,0,.15) 70%,rgba(0,0,0,.5))}
 .hero .inner{position:relative;width:100%;max-width:1040px;margin:0 auto;padding:0 16px 48px}
-.hero .kick{font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#fff;opacity:.85}
+.hero .kick{font-size:12px;font-weight:700;letter-spacing:.16em;color:#fff;opacity:.9}
+.hero .kick b{font-weight:800}
 .hero .kick b{color:var(--orange)}
 .hero h1{font-size:clamp(44px,12vw,104px);line-height:.9;font-weight:800;letter-spacing:-.02em;margin:10px 0 2px}
 .hero h1 em{font-style:italic;color:var(--orange)}
@@ -62,35 +63,39 @@ section{padding:54px 0}
 .shead{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
 h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-height:1.02;margin-bottom:8px}
 /* gallery: masonry that fuses portrait + landscape */
-.gallery{column-count:2;column-gap:10px}
-.gallery figure{break-inside:avoid;margin:0 0 10px;border-radius:10px;overflow:hidden;background:#111;cursor:zoom-in;position:relative}
+.gallery-sec{padding:54px 0}
+.gallery{column-count:2;column-gap:8px;padding:0 8px}
+.gallery figure{break-inside:avoid;margin:0 0 8px;border-radius:8px;overflow:hidden;background:#111;cursor:zoom-in;position:relative}
 .gallery img{width:100%;height:auto;transition:transform .5s,opacity .5s;opacity:.0}
 .gallery img.in{opacity:1}
 .gallery figure:hover img{transform:scale(1.03)}
-@media (min-width:680px){.gallery{column-count:3}}
-@media (min-width:1000px){.gallery{column-count:4}}
+@media (min-width:560px){.gallery{column-count:3}}
+@media (min-width:900px){.gallery{column-count:4}}
+@media (min-width:1300px){.gallery{column-count:5}}
+@media (min-width:1700px){.gallery{column-count:6}}
 /* video / coming-soon */
 .vid{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#0b0b0b;border:1px solid var(--line)}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.soon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:30px}
-.soon .play{width:64px;height:64px;border-radius:50%;border:2px solid var(--orange);display:grid;place-items:center}
-.soon .play svg{width:24px;height:24px;fill:var(--orange)}
-.soon h3{font-size:20px;font-weight:800}
-.soon p{color:var(--muted);font-size:14px;max-width:360px}
+.coming{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgba(234,90,12,.07),transparent);padding:clamp(26px,6vw,40px) clamp(20px,5vw,32px)}
+.coming .k{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.coming h3{font-size:clamp(26px,7vw,40px);font-weight:800;line-height:1.02;letter-spacing:-.01em}
+.coming p{color:var(--muted);font-size:15px;line-height:1.5;margin-top:12px;max-width:480px}
 .clip-row{display:grid;grid-template-columns:1fr;gap:12px}
 @media (min-width:680px){.clip-row{grid-template-columns:1fr 1fr}}
 .clip-row .vid{aspect-ratio:9/16}
 /* lineup */
 .lineup{list-style:none;border-top:1px solid var(--line)}
-.lineup li{display:flex;align-items:center;gap:14px;padding:14px 2px;border-bottom:1px solid var(--line)}
-.lineup time{font-variant-numeric:tabular-nums;font-weight:700;color:var(--orange);width:58px;flex:none;font-size:15px}
+.lineup li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.lineup time{font-variant-numeric:tabular-nums;font-weight:700;color:var(--orange);width:52px;flex:none;font-size:15px}
 .lineup .nm{font-size:17px;font-weight:700}
 .lineup li.hl .nm{color:#fff}
 .lineup li.hl{background:linear-gradient(90deg,rgba(234,90,12,.12),transparent)}
-.lineup .tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#000;background:var(--orange);padding:3px 8px;border-radius:999px;margin-left:8px}
-.lineup .ig{margin-left:auto;display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--muted)}
+.lineup .tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#000;background:var(--orange);padding:3px 8px;border-radius:999px}
+.lineup .igs{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px 14px}
+.lineup .ig{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--muted);white-space:nowrap}
 .lineup .ig:hover{color:var(--orange)}
-.lineup .ig svg{width:15px;height:15px}
+.lineup .ig svg{width:15px;height:15px;flex:none}
+@media (max-width:480px){.lineup .igs{margin-left:58px;width:100%}}
 /* next CTA */
 .next{border:1px solid var(--orange);border-radius:16px;padding:26px 20px;background:linear-gradient(180deg,rgba(234,90,12,.08),transparent)}
 .next .k{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange)}
@@ -98,8 +103,10 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
 .next p{color:var(--muted);font-size:15px;max-width:520px;margin-bottom:18px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 24px;border-radius:10px;background:var(--orange);color:#000;font-weight:800;font-size:16px}
 .btn:hover{background:var(--orange-hi)}
-.btn.ghost{background:transparent;color:#fff;border:1px solid #fff;margin-left:10px}
+.btn.ghost{background:transparent;color:#fff;border:1px solid #fff}
 .btn.ghost:hover{background:#fff;color:#000}
+.next .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.next .acts .btn{flex:1 1 220px}
 .foot{margin-top:10px;padding:26px 0 48px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .foot a:hover{color:var(--orange)}
 /* lightbox */
@@ -185,27 +192,26 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
 
   <section class="wrap">
     <p class="shead">The full set</p>
-    <h2>Viridity, live at 6FEET Deep</h2>
-    <div class="vid"><div class="soon"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><h3>The full set is coming to YouTube</h3><p>Every minute was filmed. The full Viridity set lands on the DIFF Radio channel soon — <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> will post when it drops.</p></div></div>
+    <div class="coming"><div class="k">On its way</div><h3>The full set is coming to&nbsp;YouTube</h3><p>Every minute was filmed. The full Viridity set lands on the DIFF Radio channel soon — follow <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> and we'll post the moment it drops.</p></div>
   </section>
 
   <section class="wrap">
     <p class="shead">Clips</p>
-    <div class="vid"><div class="soon"><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><h3>Clips dropping soon</h3><p>Short cuts from the night are on the way to our socials. Follow <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> so you don't miss them.</p></div></div>
+    <div class="coming"><div class="k">Soon</div><h3>Clips dropping soon</h3><p>Short cuts from the night are on the way to our socials. Follow <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> so you don't miss them.</p></div>
   </section>
 
   <section class="wrap">
     <p class="shead">Who played</p>
-    <ul class="lineup">      <li><time>18:00</time><span class="nm">Lady Niah</span><a class="ig" href="https://instagram.com/shaniah_thompson" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@shaniah_thompson</a></li>
-      <li><time>18:30</time><span class="nm">AK</span><a class="ig" href="https://instagram.com/ak_dnb" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@ak_dnb</a></li>
-      <li class="hl"><time>19:00</time><span class="nm">Viridity</span><span class="tag">Headliner</span><a class="ig" href="https://instagram.com/viridity_uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@viridity_uk</a></li>
-      <li><time>20:00</time><span class="nm">Alkali</span><a class="ig" href="https://instagram.com/alkalisounds" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@alkalisounds</a></li>
-      <li><time>20:30</time><span class="nm">Lubi J &amp; Electra</span><a class="ig" href="https://instagram.com/headspace_cdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@headspace_cdf</a></li>
-      <li><time>21:00</time><span class="nm">Conker B2B Insite</span><a class="ig" href="https://instagram.com/conkercollins" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@conkercollins</a><a class="ig" href="https://instagram.com/benji_insite" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@benji_insite</a></li></ul>
+    <ul class="lineup">      <li><time>18:00</time><span class="nm">Lady Niah</span><span class="igs"><a class="ig" href="https://instagram.com/shaniah_thompson" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@shaniah_thompson</a></span></li>
+      <li><time>18:30</time><span class="nm">AK</span><span class="igs"><a class="ig" href="https://instagram.com/ak_dnb" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@ak_dnb</a></span></li>
+      <li class="hl"><time>19:00</time><span class="nm">Viridity</span><span class="tag">Headliner</span><span class="igs"><a class="ig" href="https://instagram.com/viridity_uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@viridity_uk</a></span></li>
+      <li><time>20:00</time><span class="nm">Alkali</span><span class="igs"><a class="ig" href="https://instagram.com/alkalisounds" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@alkalisounds</a></span></li>
+      <li><time>20:30</time><span class="nm">Lubi J &amp; Electra</span><span class="igs"><a class="ig" href="https://instagram.com/headspace_cdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@headspace_cdf</a></span></li>
+      <li><time>21:00</time><span class="nm">Conker B2B Insite</span><span class="igs"><a class="ig" href="https://instagram.com/conkercollins" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@conkercollins</a><a class="ig" href="https://instagram.com/benji_insite" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@benji_insite</a></span></li></ul>
   </section>
 
   <section class="wrap">
-    <div class="next"><div class="k">Be in the next one</div><h2>002 · K-65</h2><p>Friday 30 October at 6FEET Under. Electro, breaks, techno. Invite only, every set filmed, free tickets while they last.</p><a class="btn" href="../k-65/">Claim your free ticket →</a><a class="btn ghost" href="../what-is-6feet-deep/">What is 6FEET Deep?</a></div>
+    <div class="next"><div class="k">Be in the next one</div><h2>002 · K-65</h2><p>Friday 30 October at 6FEET Under. Electro, breaks, techno. Invite only, every set filmed, free tickets while they last.</p><div class="acts"><a class="btn" href="../k-65/">Claim your free ticket →</a><a class="btn ghost" href="../what-is-6feet-deep/">What is 6FEET Deep?</a></div></div>
     <div class="foot"><span>6FEET Under · 94 St Mary's St, Cardiff CF10 1DX</span><span><a href="https://diffradio.com">diffradio.com</a> · <a href="https://instagram.com/diff_radio">@diff_radio</a></span></div>
   </section>
 </main>
