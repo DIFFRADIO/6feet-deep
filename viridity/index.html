@@ -45,12 +45,13 @@ a{color:inherit;text-decoration:none}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 54%}
 .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,#000 4%,rgba(0,0,0,.55) 38%,rgba(0,0,0,.15) 70%,rgba(0,0,0,.5))}
 .hero .inner{position:relative;width:100%;max-width:1200px;margin:0 auto;padding:0 16px 48px}
-/* desktop: pin the title to the far left, narrow, so it clears her face on the right */
+/* desktop: anchor the title to the right, over the darker right edge, clear of her face */
 @media (min-width:900px){
-  .hero .veil{background:linear-gradient(to top,#000 4%,rgba(0,0,0,.5) 34%,rgba(0,0,0,.1) 66%,rgba(0,0,0,.45)),linear-gradient(to right,rgba(0,0,0,.8),rgba(0,0,0,.35) 34%,transparent 52%)}
-  .hero .inner{max-width:none;margin:0;padding-left:clamp(28px,4vw,64px);padding-right:16px}
-  .hero .kick,.hero h1,.hero .meta,.hero .scroll-cue{max-width:540px}
+  .hero .veil{background:linear-gradient(to top,#000 4%,rgba(0,0,0,.5) 34%,rgba(0,0,0,.1) 66%,rgba(0,0,0,.45)),linear-gradient(to left,rgba(0,0,0,.82),rgba(0,0,0,.4) 26%,transparent 46%)}
+  .hero .inner{max-width:none;margin:0;padding:0 clamp(28px,4vw,72px) 48px;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+  .hero .kick,.hero h1,.hero .meta{max-width:560px}
   .hero h1{font-size:clamp(56px,6.2vw,96px)}
+  .hero .scroll-cue{align-self:flex-end}
 }
 .hero .kick{font-size:12px;font-weight:700;letter-spacing:.16em;color:#fff;opacity:.9}
 .hero .kick b{font-weight:800}
