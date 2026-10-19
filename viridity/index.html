@@ -41,16 +41,17 @@ a{color:inherit;text-decoration:none}
 .back{font-size:12px;font-weight:700;letter-spacing:.06em;color:#fff;border:1px solid rgba(255,255,255,.35);padding:8px 13px;border-radius:999px;background:rgba(0,0,0,.4);backdrop-filter:blur(8px)}
 .back:hover{border-color:var(--orange);color:var(--orange)}
 /* hero */
-.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden}
-/* mobile: her face sits high, photo dissolves into solid black where the title lives */
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 22%}
-.hero .veil{position:absolute;inset:0;background:linear-gradient(to top,#000 26%,rgba(0,0,0,.72) 44%,rgba(0,0,0,.2) 66%,rgba(0,0,0,.35))}
-.hero .inner{position:relative;width:100%;max-width:1200px;margin:0 auto;padding:0 20px 44px;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
-.hero .kick,.hero h1,.hero .meta{max-width:300px}
-/* desktop: anchor the title to the right, over the darker right edge, clear of her face */
+/* mobile: photo stacked on top, her full face clear, dissolving into black; title flows BELOW it */
+.hero{position:relative;background:#000;overflow:hidden}
+.hero>img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 12%;-webkit-mask-image:linear-gradient(to bottom,#000 60%,rgba(0,0,0,0) 99%);mask-image:linear-gradient(to bottom,#000 60%,rgba(0,0,0,0) 99%)}
+.hero .veil{display:none}
+.hero .inner{position:relative;margin-top:-24vw;padding:0 20px 40px;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+.hero .kick,.hero h1,.hero .meta{max-width:320px}
+/* desktop: title overlaid, anchored right over the darker edge, clear of her face */
 @media (min-width:900px){
-  .hero>img{object-position:58% 54%}
-  .hero .veil{background:linear-gradient(to top,#000 4%,rgba(0,0,0,.5) 34%,rgba(0,0,0,.1) 66%,rgba(0,0,0,.45)),linear-gradient(to left,rgba(0,0,0,.82),rgba(0,0,0,.4) 26%,transparent 46%)}
+  .hero{min-height:88vh;display:flex;align-items:flex-end}
+  .hero>img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-position:58% 54%;-webkit-mask-image:none;mask-image:none}
+  .hero .veil{display:block;position:absolute;inset:0;background:linear-gradient(to top,#000 4%,rgba(0,0,0,.5) 34%,rgba(0,0,0,.1) 66%,rgba(0,0,0,.45)),linear-gradient(to left,rgba(0,0,0,.82),rgba(0,0,0,.4) 26%,transparent 46%)}
   .hero .inner{max-width:none;margin:0;padding:0 clamp(28px,4vw,72px) 48px;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
   .hero .kick,.hero h1,.hero .meta{max-width:560px}
   .hero h1{font-size:clamp(56px,6.2vw,96px)}
