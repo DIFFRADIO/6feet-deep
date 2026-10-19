@@ -51,9 +51,9 @@ a{color:inherit;text-decoration:none}
 @media (min-width:900px){
   .hero{min-height:88vh;display:flex;align-items:flex-end}
   .hero>img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-position:58% 54%;-webkit-mask-image:none;mask-image:none}
-  .hero .veil{display:block;position:absolute;inset:0;background:linear-gradient(to top,#000 4%,rgba(0,0,0,.5) 34%,rgba(0,0,0,.1) 66%,rgba(0,0,0,.45)),linear-gradient(to right,rgba(0,0,0,.8),rgba(0,0,0,.35) 34%,transparent 52%)}
-  .hero .inner{max-width:none;margin:0;padding:0 16px 48px clamp(28px,4vw,64px);display:block;text-align:left}
-  .hero .kick,.hero h1,.hero .meta{max-width:540px}
+  .hero .veil{display:block;position:absolute;inset:0;background:linear-gradient(to top,#000 4%,rgba(0,0,0,.5) 34%,rgba(0,0,0,.1) 66%,rgba(0,0,0,.45)),linear-gradient(to left,rgba(0,0,0,.82),rgba(0,0,0,.4) 26%,transparent 46%)}
+  .hero .inner{width:100%;max-width:none;margin:0;padding:0 clamp(28px,4vw,72px) 48px;display:flex;flex-direction:column;align-items:flex-end;text-align:right}
+  .hero .kick,.hero h1,.hero .meta{max-width:560px}
   .hero h1{font-size:clamp(56px,6.2vw,96px)}
 }
 .hero .kick{font-size:12px;font-weight:700;letter-spacing:.16em;color:#fff;opacity:.9}
@@ -71,6 +71,11 @@ a{color:inherit;text-decoration:none}
 section{padding:54px 0}
 .lead{max-width:640px;font-size:clamp(17px,4.4vw,21px);line-height:1.5;color:#eee}
 .lead b{color:#fff}
+/* desktop: centre the intro copy and let it run wide to fill the space under the hero */
+@media (min-width:900px){
+  #night{padding-top:40px;padding-bottom:12px}
+  #night .lead{max-width:880px;margin:0 auto;text-align:center}
+}
 .shead{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
 .gallery-head{padding:0 8px}
 .shead.big{font-size:clamp(22px,5.4vw,40px);letter-spacing:.06em;line-height:1.05;margin-bottom:24px;text-align:left}
