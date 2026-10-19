@@ -48,6 +48,9 @@ h1 .six{color:var(--red)}
 .events{display:grid;grid-template-columns:1fr;gap:16px}
 .ev{position:relative;display:block;border:1px solid var(--line);border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:#111}
 .ev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .5s}
+.events.past .ev.done{aspect-ratio:4/5}
+.ev.done img{object-position:62% 66%}
+@media (min-width:760px){.events.past{grid-template-columns:1fr 1fr 1fr}.events.past .ev.done{aspect-ratio:16/10}}
 .ev:hover img{transform:scale(1.03)}
 .ev video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ev.about{border-color:var(--orange)}
@@ -81,17 +84,6 @@ h1 .six{color:var(--red)}
 
   <p class="kicker">Upcoming</p>
   <div class="events">
-    <a class="ev" href="viridity/" data-slug="001-viridity">
-      <img src="assets/viridity-card.jpg" alt="">
-      <div class="grad"></div>
-      <div class="body">
-        <span class="num">001</span><h2>Viridity</h2>
-        <p class="date">Sat 17 Oct · Doors 17:30 · Filming from 18:00 · Ends 21:30 · Drum &amp; bass, live vocals</p>
-        <div class="meter-top"><b data-label>Spots being saved</b><span data-count></span></div>
-        <div class="bar"><i data-bar></i></div>
-        <span class="btn" data-btn>Save me a spot</span>
-      </div>
-    </a>
     <a class="ev" href="k-65/" data-slug="002-k65">
       <img src="assets/k65-card.jpg" alt="">
       <div class="grad"></div>
@@ -110,6 +102,19 @@ h1 .six{color:var(--red)}
         <span class="num">The series</span><h2>What is 6FEET Deep?</h2>
         <p class="date">Inside the room · Invite only · Every set filmed · For the real ones</p>
         <span class="btn ghost">Find out more</span>
+      </div>
+    </a>
+  </div>
+
+  <p class="kicker" style="margin-top:52px">Experience the nights</p>
+  <div class="events past">
+    <a class="ev done" href="viridity/">
+      <img src="assets/events/001-viridity/hero.jpg" alt="">
+      <div class="grad"></div>
+      <div class="body">
+        <span class="num">001</span><h2>Viridity</h2>
+        <p class="date">Sat 17 Oct · Drum &amp; bass, live vocals · Filmed live</p>
+        <span class="btn ghost">Experience the night →</span>
       </div>
     </a>
   </div>
