@@ -44,7 +44,12 @@ a{color:inherit;text-decoration:none}
 .hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden}
 .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 54%}
 .hero .veil{position:absolute;inset:0;background:linear-gradient(to top,#000 4%,rgba(0,0,0,.55) 38%,rgba(0,0,0,.15) 70%,rgba(0,0,0,.5))}
-.hero .inner{position:relative;width:100%;max-width:1040px;margin:0 auto;padding:0 16px 48px}
+.hero .inner{position:relative;width:100%;max-width:1200px;margin:0 auto;padding:0 16px 48px}
+/* desktop: keep the title in the darker left third so it never covers her face */
+@media (min-width:900px){
+  .hero .veil{background:linear-gradient(to top,#000 4%,rgba(0,0,0,.5) 34%,rgba(0,0,0,.1) 66%,rgba(0,0,0,.45)),linear-gradient(to right,rgba(0,0,0,.72),rgba(0,0,0,.35) 42%,transparent 60%)}
+  .hero .kick,.hero h1,.hero .meta,.hero .scroll-cue{max-width:600px}
+}
 .hero .kick{font-size:12px;font-weight:700;letter-spacing:.16em;color:#fff;opacity:.9}
 .hero .kick b{font-weight:800}
 .hero .kick b{color:var(--orange)}
@@ -76,13 +81,10 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
 /* video / coming-soon */
 .vid{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#0b0b0b;border:1px solid var(--line)}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.coming{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgba(234,90,12,.07),transparent);padding:clamp(26px,6vw,40px) clamp(20px,5vw,32px)}
-.coming .k{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
-.coming h3{font-size:clamp(26px,7vw,40px);font-weight:800;line-height:1.02;letter-spacing:-.01em}
-.coming p{color:var(--muted);font-size:15px;line-height:1.5;margin-top:12px;max-width:480px}
-.clip-row{display:grid;grid-template-columns:1fr;gap:12px}
-@media (min-width:680px){.clip-row{grid-template-columns:1fr 1fr}}
-.clip-row .vid{aspect-ratio:9/16}
+.coming{display:flex;gap:18px;align-items:stretch;padding:4px 0}
+.coming .accent{width:3px;background:var(--orange);border-radius:3px;flex:none}
+.coming h3{font-size:clamp(20px,4.6vw,27px);font-weight:700;line-height:1.18;letter-spacing:-.005em}
+.coming p{color:var(--muted);font-size:15px;line-height:1.5;margin-top:9px;max-width:520px}
 /* lineup */
 .lineup{list-style:none;border-top:1px solid var(--line)}
 .lineup li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:14px 4px;border-bottom:1px solid var(--line)}
@@ -192,12 +194,7 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
 
   <section class="wrap">
     <p class="shead">The full set</p>
-    <div class="coming"><div class="k">On its way</div><h3>The full set is coming to&nbsp;YouTube</h3><p>Every minute was filmed. The full Viridity set lands on the DIFF Radio channel soon — follow <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> and we'll post the moment it drops.</p></div>
-  </section>
-
-  <section class="wrap">
-    <p class="shead">Clips</p>
-    <div class="coming"><div class="k">Soon</div><h3>Clips dropping soon</h3><p>Short cuts from the night are on the way to our socials. Follow <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> so you don't miss them.</p></div>
+    <div class="coming"><div class="accent"></div><div><h3>Filmed in full. The set lands on YouTube soon.</h3><p>Follow <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> and we'll post the moment it drops.</p></div></div>
   </section>
 
   <section class="wrap">
