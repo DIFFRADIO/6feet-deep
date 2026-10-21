@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your night · 6FEET Deep feedback</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--panel:#0e0e0e;--line:#262626;--text:#fff;--muted:#a3a3a3;--dim:#6b6b6b;--orange:#ea5a0c;--orange-hi:#ff6a1a;--red:#e3161b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Sora,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit}
+.wrap{max-width:640px;margin:0 auto;padding:36px 18px 64px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:34px}
+.brand img{width:40px;height:auto}
+.brand span{font-size:12px;font-weight:700;letter-spacing:.2em}
+.brand span em{display:block;font-style:normal;color:var(--orange);font-size:10px;letter-spacing:.24em}
+h1{font-size:clamp(30px,8vw,46px);line-height:1.02;font-weight:800;letter-spacing:-.02em}
+h1 em{font-style:italic;color:var(--orange)}
+.sub{color:var(--muted);font-size:16px;margin:14px 0 36px;max-width:440px}
+.q{border-top:1px solid var(--line);padding:26px 0}
+.q:first-of-type{border-top:none;padding-top:4px}
+.q .lab{font-size:17px;font-weight:700;margin-bottom:4px}
+.q .hint{color:var(--dim);font-size:13px;margin-bottom:16px}
+.scale{display:flex;gap:8px}
+.scale button{flex:1;min-height:52px;border:1px solid var(--line);background:transparent;color:#ddd;border-radius:12px;font-family:inherit;font-size:19px;font-weight:700;cursor:pointer;transition:.15s}
+.scale button:hover{border-color:var(--orange)}
+.scale button[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#000}
+.scale .ends{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:9px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pills button{border:1px solid var(--line);background:transparent;color:#ddd;border-radius:999px;padding:11px 18px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:.15s}
+.pills button:hover{border-color:var(--orange)}
+.pills button[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#000}
+textarea,input[type=text]{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--text);font-family:inherit;font-size:16px;padding:14px;resize:vertical}
+textarea:focus,input:focus{outline:none;border-color:var(--orange)}
+textarea{min-height:92px}
+.send{width:100%;min-height:56px;margin-top:30px;border:none;border-radius:12px;background:var(--orange);color:#000;font-family:inherit;font-weight:800;font-size:17px;cursor:pointer;transition:.15s}
+.send:hover{background:var(--orange-hi)}
+.send:disabled{opacity:.55;cursor:default}
+.err{color:var(--red);font-size:14px;margin-top:14px;min-height:18px}
+.done{text-align:center;padding:60px 0}
+.done h2{font-size:clamp(28px,7vw,40px);font-weight:800;margin-bottom:12px}
+.done h2 em{font-style:italic;color:var(--orange)}
+.done p{color:var(--muted);font-size:16px;max-width:400px;margin:0 auto 26px}
+.done a{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:12px;background:var(--orange);color:#000;font-weight:800;font-size:16px;text-decoration:none}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><img src="../assets/logo.png?v=8ff0ba51" alt="DIFF Radio"><span>DIFF Radio<em>6FEET DEEP</em></span></div>
+
+  <div id="form">
+    <h1>How was <em>Viridity</em>?</h1>
+    <p class="sub">Two minutes, totally honest. This genuinely shapes the next one — nothing's off limits.</p>
+
+    <div class="q">
+      <div class="lab">How was the vibe?</div>
+      <div class="hint">1 = flat · 5 = unreal</div>
+      <div class="scale" data-field="vibe" role="group" aria-label="Vibe out of 5">
+        <button type="button" value="1">1</button><button type="button" value="2">2</button><button type="button" value="3">3</button><button type="button" value="4">4</button><button type="button" value="5">5</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="lab">Before you grabbed a ticket, how easy was the idea to understand?</div>
+      <div class="hint">1 = confusing · 5 = totally clear</div>
+      <div class="scale" data-field="clarity" role="group" aria-label="Clarity out of 5">
+        <button type="button" value="1">1</button><button type="button" value="2">2</button><button type="button" value="3">3</button><button type="button" value="4">4</button><button type="button" value="5">5</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="lab">Would you come again?</div>
+      <div class="pills" data-field="come_again" role="group" aria-label="Come again">
+        <button type="button" value="Yes">Yes</button><button type="button" value="Maybe">Maybe</button><button type="button" value="No">No</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="lab">Would you come even for a genre that isn't your favourite?</div>
+      <div class="pills" data-field="cross_genre" role="group" aria-label="Come for another genre">
+        <button type="button" value="Yes">Yes</button><button type="button" value="Maybe">Maybe</button><button type="button" value="No">No</button>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="lab">How could it be improved?</div>
+      <textarea id="improve" placeholder="Anything — sound, timings, the room, comms, the lot."></textarea>
+    </div>
+
+    <div class="q">
+      <div class="lab">Who do you want to see at a 6FEET Deep?</div>
+      <textarea id="want" placeholder="Artists, DJs, crews — dream big or keep it local."></textarea>
+    </div>
+
+    <button class="send" id="send">Send it over</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="thanks" class="done hidden">
+    <h2>Massive <em>thank you</em></h2>
+    <p>That's exactly what we need to make the next one better. See you at K-65.</p>
+    <a href="/k-65/">Claim your K-65 ticket →</a>
+  </div>
+</div>
+
+<script>
+const SB="https://tgmpgjvvtyhtodltvhbz.supabase.co",KEY="sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK";
+const qs=new URLSearchParams(location.search), CODE=qs.get('c')||null;
+const picks={vibe:null,clarity:null,come_again:null,cross_genre:null};
+document.querySelectorAll('[data-field]').forEach(group=>{
+  const f=group.dataset.field;
+  group.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    picks[f]=b.value;
+    group.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
+  }));
+});
+const send=document.getElementById('send'), err=document.getElementById('err');
+send.addEventListener('click', async ()=>{
+  err.textContent='';
+  const body={
+    p_slug:'001-viridity', p_code:CODE,
+    p_vibe:picks.vibe?parseInt(picks.vibe):null,
+    p_clarity:picks.clarity?parseInt(picks.clarity):null,
+    p_come_again:picks.come_again, p_cross_genre:picks.cross_genre,
+    p_improve:document.getElementById('improve').value||null,
+    p_want:document.getElementById('want').value||null,
+    p_ua:navigator.userAgent
+  };
+  if(!picks.vibe && !picks.clarity && !body.p_improve && !body.p_want && !picks.come_again && !picks.cross_genre){
+    err.textContent='Pop at least one answer in first.'; return;
+  }
+  send.disabled=true; send.textContent='Sending…';
+  try{
+    const r=await fetch(`${SB}/rest/v1/rpc/spot_feedback`,{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!r.ok) throw new Error(r.status);
+    document.getElementById('form').classList.add('hidden');
+    document.getElementById('thanks').classList.remove('hidden');
+    window.scrollTo(0,0);
+  }catch(e){
+    err.textContent='Something went wrong — give it another go in a sec.';
+    send.disabled=false; send.textContent='Send it over';
+  }
+});
+</script>
+</body>
+</html>
