@@ -168,5 +168,33 @@ f.addEventListener("submit", async ev => {
   }catch(e){ console.error("[6FEET Deep] notify failed", e); b.disabled = false; b.textContent = "Notify me"; err.textContent = "Something went wrong. Try again, or message @diff_radio on Instagram."; }
 });
 </script>
+
+<div id="k65bar" aria-hidden="true">
+  <div class="k65bar-in">
+    <div class="k65bar-txt"><b>K-65 &middot; Fri 30 Oct</b><span>Free, invite-only, every set filmed &mdash; limited spaces.</span></div>
+    <a class="k65bar-cta" href="/k-65/">Claim your free ticket &rarr;</a>
+    <button class="k65bar-x" type="button" aria-label="Close">&times;</button>
+  </div>
+</div>
+<style>
+#k65bar{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#000;border-top:1px solid #262626;transform:translateY(110%);transition:transform .4s ease;font-family:Sora,system-ui,-apple-system,sans-serif;display:none}
+#k65bar.show{transform:translateY(0)}
+.k65bar-in{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:14px}
+.k65bar-txt{display:flex;flex-direction:column;color:#fff;font-size:13px;line-height:1.35;flex:1;min-width:0}
+.k65bar-txt b{color:#ea5a0c;font-size:14px;font-weight:800;letter-spacing:.02em}
+.k65bar-txt span{color:#a3a3a3}
+.k65bar-cta{flex:none;background:#ea5a0c;color:#000;font-weight:800;font-size:14px;text-decoration:none;padding:11px 16px;border-radius:9px;white-space:nowrap}
+.k65bar-cta:hover{background:#ff6a1a}
+.k65bar-x{flex:none;background:transparent;border:none;color:#777;font-size:18px;cursor:pointer;padding:6px;line-height:1}
+.k65bar-x:hover{color:#fff}
+@media(max-width:560px){.k65bar-txt span{display:none}.k65bar-in{gap:10px;padding:10px 12px}.k65bar-cta{padding:10px 13px;font-size:13px}}
+</style>
+<script>
+(function(){try{if(localStorage.getItem('k65bar')==='1')return;}catch(e){}
+var b=document.getElementById('k65bar');if(!b)return;
+setTimeout(function(){b.style.display='block';requestAnimationFrame(function(){b.classList.add('show');});},4000);
+b.querySelector('.k65bar-x').addEventListener('click',function(){b.classList.remove('show');try{localStorage.setItem('k65bar','1');}catch(e){}setTimeout(function(){b.style.display='none';},400);});
+})();
+</script>
 </body>
 </html>
