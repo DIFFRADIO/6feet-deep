@@ -171,5 +171,12 @@ setTimeout(function(){b.style.display='block';requestAnimationFrame(function(){b
 b.querySelector('.k65bar-x').addEventListener('click',function(){b.classList.remove('show');try{localStorage.setItem('k65bar','1');}catch(e){}setTimeout(function(){b.style.display='none';},400);});
 })();
 </script>
+
+<script>
+(function(){try{
+var k='dr_sess',s='';try{s=localStorage.getItem(k);if(!s){s=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem(k,s);}}catch(e){}
+fetch('https://tgmpgjvvtyhtodltvhbz.supabase.co/rest/v1/rpc/log_view',{method:'POST',headers:{apikey:'sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK','Content-Type':'application/json'},body:JSON.stringify({p_path:(location.pathname||'/'),p_ref:(new URLSearchParams(location.search).get('ref')||''),p_session:s,p_ua:navigator.userAgent}),keepalive:true}).catch(function(){});
+}catch(e){}})();
+</script>
 </body>
 </html>
