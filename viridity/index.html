@@ -96,6 +96,29 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
 @media (min-width:900px){.gallery{column-count:4}}
 @media (min-width:1300px){.gallery{column-count:5}}
 @media (min-width:1700px){.gallery{column-count:6}}
+/* clip wall */
+.clips-sec{padding:40px 0 10px}
+.clips{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:0 8px}
+@media (min-width:700px){.clips{grid-template-columns:repeat(3,1fr);gap:12px;max-width:1040px;margin:0 auto;padding:0 16px}}
+@media (min-width:1000px){.clips{grid-template-columns:repeat(4,1fr)}}
+.clip{position:relative;display:block;aspect-ratio:9/16;border:0;padding:0;margin:0;border-radius:12px;overflow:hidden;cursor:pointer;background:#111}
+.clip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.clip:hover img{transform:scale(1.04)}
+.clip:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),transparent 42%);pointer-events:none}
+.clip-name{position:absolute;left:12px;bottom:11px;z-index:2;color:#fff;font-weight:800;font-size:15px;letter-spacing:.01em;text-shadow:0 1px 5px rgba(0,0,0,.7)}
+.clip-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:48px;height:48px;border-radius:50%;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center}
+.clip-play svg{width:20px;height:20px;fill:#fff;margin-left:2px}
+/* full-screen vertical player */
+.vlb{position:fixed;inset:0;z-index:60;background:#000;display:none;align-items:center;justify-content:center;touch-action:none}
+.vlb.on{display:flex}
+.vlb video{height:100%;width:100%;object-fit:contain;background:#000}
+@media (min-width:700px){.vlb video{height:90vh;width:auto;max-width:94vw;border-radius:12px}}
+.vlb .x{position:absolute;top:14px;right:16px;font-size:32px;line-height:1;color:#fff;background:none;border:0;cursor:pointer;opacity:.85;z-index:3}
+.vlb .vnav{position:absolute;top:50%;transform:translateY(-50%);font-size:40px;color:#fff;background:none;border:0;cursor:pointer;opacity:.6;padding:10px 16px;z-index:3}
+.vlb .vnav:hover,.vlb .x:hover{opacity:1}
+.vprev{left:2px}.vnext{right:2px}
+.vname{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#fff;font-weight:800;font-size:17px;letter-spacing:.02em;text-shadow:0 1px 6px rgba(0,0,0,.8);z-index:3;pointer-events:none}
+@media (max-width:620px){.vlb .vnav{font-size:30px;padding:8px}}
 /* video / coming-soon */
 .vid{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#0b0b0b;border:1px solid var(--line)}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -207,6 +230,13 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
 <figure><img src="../assets/events/001-viridity/v-5708.jpg?v=fd205dcf" alt="6FEET Deep 001: Viridity at 6FEET Under, Cardiff" loading="lazy" width="1500" height="1000"></figure></div>
   </section>
 
+  <section class="clips-sec"><div class="wrap"><p class="shead big">The night in clips</p></div><div class="clips"><button class="clip" type="button" data-src="../assets/events/001-viridity/clips/v-ladyniah.mp4?v=7642c8f7" data-name="Lady Niah"><img src="../assets/events/001-viridity/clips/v-ladyniah.jpg?v=69010e2a" alt="Lady Niah at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">Lady Niah</span></button>
+<button class="clip" type="button" data-src="../assets/events/001-viridity/clips/v-ak.mp4?v=6f68cd4a" data-name="AK"><img src="../assets/events/001-viridity/clips/v-ak.jpg?v=1a42f9c1" alt="AK at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">AK</span></button>
+<button class="clip" type="button" data-src="../assets/events/001-viridity/clips/v-alkali.mp4?v=101a731a" data-name="Alkali"><img src="../assets/events/001-viridity/clips/v-alkali.jpg?v=158caa79" alt="Alkali at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">Alkali</span></button>
+<button class="clip" type="button" data-src="../assets/events/001-viridity/clips/v-lubij.mp4?v=33b46260" data-name="Lubi J &amp; Electra"><img src="../assets/events/001-viridity/clips/v-lubij.jpg?v=3f4752f8" alt="Lubi J &amp; Electra at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">Lubi J &amp; Electra</span></button>
+<button class="clip" type="button" data-src="../assets/events/001-viridity/clips/v-conker.mp4?v=e5e0e05f" data-name="Conker"><img src="../assets/events/001-viridity/clips/v-conker.jpg?v=025a5f7b" alt="Conker at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">Conker</span></button>
+<button class="clip" type="button" data-src="../assets/events/001-viridity/clips/v-insite.mp4?v=0b192d50" data-name="Insite"><img src="../assets/events/001-viridity/clips/v-insite.jpg?v=e7e8876d" alt="Insite at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">Insite</span></button></div></section>
+
   <section class="wrap">
     <p class="shead">The full set</p>
     <div class="coming"><div class="accent"></div><div><h3>Filmed in full. The set lands on YouTube soon.</h3><p>Follow <a href="https://instagram.com/diff_radio" style="color:var(--orange)">@diff_radio</a> and we'll post the moment it drops.</p></div></div>
@@ -235,6 +265,14 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
   <button class="nav next-btn" aria-label="Next">&#8250;</button>
 </div>
 
+<div class="vlb" id="vlb">
+  <button class="x" aria-label="Close">&times;</button>
+  <button class="vnav vprev" aria-label="Previous">&#8249;</button>
+  <video playsinline controls preload="metadata"></video>
+  <button class="vnav vnext" aria-label="Next">&#8250;</button>
+  <div class="vname"></div>
+</div>
+
 <script>
 // fade photos in as they load
 document.querySelectorAll(".gallery img").forEach(img=>{
@@ -255,6 +293,29 @@ document.querySelectorAll(".gallery img").forEach(img=>{
   lb.querySelector(".next-btn").onclick=e=>{e.stopPropagation();open(i+1);};
   lb.addEventListener("click",e=>{if(e.target===lb||e.target===big)close();});
   document.addEventListener("keydown",e=>{if(!lb.classList.contains("on"))return;if(e.key==="Escape")close();if(e.key==="ArrowRight")open(i+1);if(e.key==="ArrowLeft")open(i-1);});
+})();
+// clip player — full-screen vertical, swipe/next through artists
+(function(){
+  const clips=[...document.querySelectorAll(".clip")];
+  if(!clips.length) return;
+  const data=clips.map(c=>({src:c.dataset.src,name:c.dataset.name}));
+  const vlb=document.getElementById("vlb"), vid=vlb.querySelector("video"), nameEl=vlb.querySelector(".vname");
+  let i=0;
+  const load=n=>{i=(n+data.length)%data.length;vid.src=data[i].src;nameEl.textContent=data[i].name;vid.currentTime=0;vid.play().catch(()=>{});};
+  const open=n=>{load(n);vlb.classList.add("on");document.body.style.overflow="hidden";};
+  const close=()=>{vlb.classList.remove("on");vid.pause();vid.removeAttribute("src");vid.load();document.body.style.overflow="";};
+  clips.forEach((c,n)=>c.addEventListener("click",()=>open(n)));
+  vlb.querySelector(".x").onclick=close;
+  vlb.querySelector(".vprev").onclick=e=>{e.stopPropagation();load(i-1);};
+  vlb.querySelector(".vnext").onclick=e=>{e.stopPropagation();load(i+1);};
+  vid.addEventListener("ended",()=>load(i+1));
+  vlb.addEventListener("click",e=>{if(e.target===vlb)close();});
+  document.addEventListener("keydown",e=>{if(!vlb.classList.contains("on"))return;if(e.key==="Escape")close();if(e.key==="ArrowRight"||e.key==="ArrowDown")load(i+1);if(e.key==="ArrowLeft"||e.key==="ArrowUp")load(i-1);});
+  let sx=0,sy=0;
+  vlb.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  vlb.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dy)>55&&Math.abs(dy)>Math.abs(dx))load(dy<0?i+1:i-1);
+    else if(Math.abs(dx)>55)load(dx<0?i+1:i-1);},{passive:true});
 })();
 </script>
 
