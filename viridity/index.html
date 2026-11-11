@@ -81,9 +81,9 @@ section{padding:54px 0}
 .gallery-head{padding:0 8px}
 .shead.big{font-size:clamp(22px,5.4vw,40px);letter-spacing:.06em;line-height:1.05;margin-bottom:24px;text-align:left}
 /* mobile: shout about the lineup + breathing room above it */
-.lineup-sec{margin-top:40px}
+.lineup-sec{margin-top:56px}
 .shead.shout{font-size:clamp(26px,7vw,34px);letter-spacing:.04em;line-height:1.05;margin-bottom:22px}
-@media (min-width:900px){.lineup-sec{margin-top:0}.shead.shout{font-size:11px;letter-spacing:.24em;margin-bottom:18px}}
+@media (min-width:900px){.shead.shout{font-size:11px;letter-spacing:.24em;margin-bottom:18px}}
 h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-height:1.02;margin-bottom:8px}
 /* gallery: masonry that fuses portrait + landscape */
 .gallery-sec{padding:54px 0}
@@ -161,6 +161,7 @@ h2{font-size:clamp(28px,7vw,44px);font-weight:800;letter-spacing:-.01em;line-hei
 .lb .nav:hover,.lb .x:hover{opacity:1}
 .lb .prev{left:4px}.lb .next-btn{right:4px}
 @media (max-width:620px){.lb .nav{font-size:30px;padding:8px}}
+.setaudio{position:fixed;left:16px;bottom:16px;z-index:55}.setaudio-btn{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;border:none;border-radius:999px;padding:12px 18px 12px 15px;font-family:Sora,system-ui,sans-serif;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.5);transition:background .2s}.setaudio-btn:hover{background:var(--orange-hi)}.setaudio-btn .sa-icon{display:flex;align-items:center;justify-content:center;width:18px;height:16px}.setaudio-btn .sa-icon svg{width:18px;height:18px;fill:#fff}.setaudio.playing .sa-play{display:none}.setaudio .sa-eq{display:none}.setaudio.playing .sa-eq{display:flex;gap:2px;align-items:flex-end;height:16px}.setaudio .sa-eq i{width:3px;height:5px;background:#fff;border-radius:2px;animation:eq .9s infinite ease-in-out}.setaudio .sa-eq i:nth-child(2){animation-delay:.2s}.setaudio .sa-eq i:nth-child(3){animation-delay:.4s}@keyframes eq{0%,100%{height:4px}50%{height:16px}}@media (max-width:560px){.setaudio{left:12px;bottom:12px}.setaudio-btn{padding:11px 15px;font-size:13px}}
 </style>
 </head>
 <body>
@@ -324,6 +325,19 @@ document.querySelectorAll(".gallery img").forEach(img=>{
 var k='dr_sess',s='';try{s=localStorage.getItem(k);if(!s){s=Date.now().toString(36)+Math.random().toString(36).slice(2,8);localStorage.setItem(k,s);}}catch(e){}
 fetch('https://tgmpgjvvtyhtodltvhbz.supabase.co/rest/v1/rpc/log_view',{method:'POST',headers:{apikey:'sb_publishable_-qU9zP_R-s1a6FX_X3PZRw_MGcFVBRK','Content-Type':'application/json'},body:JSON.stringify({p_path:(location.pathname||'/'),p_ref:(new URLSearchParams(location.search).get('ref')||''),p_session:s,p_ua:navigator.userAgent}),keepalive:true}).catch(function(){});
 }catch(e){}})();
+</script>
+<div class="setaudio" id="setaudio"><audio id="sa-el" src="../assets/events/001-viridity/set.mp3?v=7255730e" loop preload="none"></audio><button class="setaudio-btn" id="sa-btn" type="button" aria-label="Experience the night with sound"><span class="sa-icon"><span class="sa-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="sa-eq"><i></i><i></i><i></i></span></span><span class="sa-label">Experience the night</span></button></div>
+<script>
+(function(){
+  const box=document.getElementById("setaudio"); if(!box) return;
+  const el=document.getElementById("sa-el"), btn=document.getElementById("sa-btn");
+  let playing=false, duck=false;
+  const play=()=>{el.play().then(()=>{playing=true;box.classList.add("playing");}).catch(()=>{});};
+  const pause=()=>{el.pause();playing=false;box.classList.remove("playing");};
+  btn.addEventListener("click",()=>{playing?pause():play();});
+  const vlb=document.getElementById("vlb");
+  if(vlb){new MutationObserver(()=>{if(vlb.classList.contains("on")){if(playing){duck=true;pause();}}else if(duck){duck=false;play();}}).observe(vlb,{attributes:true,attributeFilter:["class"]});}
+})();
 </script>
 </body>
 </html>

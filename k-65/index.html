@@ -74,9 +74,9 @@ section{padding:54px 0}
 .shead{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
 .gallery-head{padding:0 8px}
 .shead.big{font-family:var(--hfont);font-size:clamp(16px,3.6vw,27px);font-weight:400;letter-spacing:-.05em;line-height:1.05;margin-bottom:24px;text-align:left;text-transform:none;color:#fff}
-.lineup-sec{margin-top:40px}
+.lineup-sec{margin-top:56px}
 .shead.shout{font-family:var(--hfont);font-size:clamp(18px,4.4vw,26px);font-weight:400;letter-spacing:-.05em;line-height:1.05;margin-bottom:22px;text-transform:none;color:#fff}
-@media (min-width:900px){.lineup-sec{margin-top:0}.shead.shout{font-size:clamp(22px,2.5vw,32px)}}
+@media (min-width:900px){.shead.shout{font-size:clamp(22px,2.5vw,32px)}}
 h2{font-family:var(--hfont);font-size:clamp(17px,3.8vw,28px);font-weight:400;letter-spacing:-.05em;line-height:1.05;margin-bottom:8px}
 /* gallery */
 .gallery-sec{padding:44px 0}
@@ -269,7 +269,7 @@ h2{font-family:var(--hfont);font-size:clamp(17px,3.8vw,28px);font-weight:400;let
 <button class="clip" type="button" data-src="../assets/events/002-k65/clips/v-nooneyet.mp4?v=f4a8483a" data-name="No One Yet"><img src="../assets/events/002-k65/clips/v-nooneyet.jpg?v=4f6912d8" alt="No One Yet at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">No One Yet</span></button>
 <button class="clip" type="button" data-src="../assets/events/002-k65/clips/v-midicartel.mp4?v=c46170a9" data-name="Midi Cartel"><img src="../assets/events/002-k65/clips/v-midicartel.jpg?v=5aa678a7" alt="Midi Cartel at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">Midi Cartel</span></button>
 <button class="clip" type="button" data-src="../assets/events/002-k65/clips/v-lowselise.mp4?v=5bd456f5" data-name="Lows &amp; Elise"><img src="../assets/events/002-k65/clips/v-lowselise.jpg?v=0f339ad1" alt="Lows &amp; Elise at 6FEET Deep" loading="lazy"><span class="clip-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="clip-name">Lows &amp; Elise</span></button></div></section>
-  <section class="wrap"><p class="shead">The full set</p><div class="coming"><div class="accent"></div><div><h3>Filmed in full. The headline set lands on YouTube soon.</h3><p>Follow <a href="https://instagram.com/diff_radio" style="color:var(--accent)">@diff_radio</a> and we&rsquo;ll post the moment it drops.</p></div></div></section>
+  <section class="wrap" style="padding-top:26px"><p class="shead">The full set</p><div class="coming"><div class="accent"></div><div><h3>Filmed in full. The headline set lands on YouTube soon.</h3><p>Follow <a href="https://instagram.com/diff_radio" style="color:var(--accent)">@diff_radio</a> and we&rsquo;ll post the moment it drops.</p></div></div></section>
 
   <section class="wrap lineup-sec">
     <p class="shead shout">Who played</p>
@@ -294,7 +294,7 @@ h2{font-family:var(--hfont);font-size:clamp(17px,3.8vw,28px);font-weight:400;let
   <button class="nav next-btn" aria-label="Next">&#8250;</button>
 </div>
 <div class="vlb" id="vlb"><button class="x" aria-label="Close">&times;</button><button class="vnav vprev" aria-label="Previous">&#8249;</button><video playsinline controls preload="metadata"></video><button class="vnav vnext" aria-label="Next">&#8250;</button><div class="vname"></div></div>
-
+<div class="setaudio" id="setaudio"><audio id="sa-el" src="../assets/events/002-k65/set.mp3?v=1b66fbf1" loop preload="none"></audio><button class="setaudio-btn" id="sa-btn" type="button" aria-label="Experience the night with sound"><span class="sa-icon"><span class="sa-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="sa-eq"><i></i><i></i><i></i></span></span><span class="sa-label">Experience the night</span></button></div>
 <script>
 document.querySelectorAll(".gallery img").forEach(img=>{
   const show=()=>img.classList.add("in");
