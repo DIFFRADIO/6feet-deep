@@ -81,6 +81,11 @@ h1 .six{color:var(--red)}
 @media (min-width:760px) and (max-width:999px){.ev.about{grid-column:1 / -1;aspect-ratio:16/9}}
 @media (min-width:760px){.events{grid-template-columns:1fr 1fr}.wrap{padding-top:64px}}
 @media (min-width:1000px){.events{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:759px){
+  .events.past{display:flex;grid-template-columns:none;gap:14px;overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;scroll-snap-type:none;overscroll-behavior-x:contain;margin:0 -16px;padding:0 16px 10px;scrollbar-width:none}
+  .events.past::-webkit-scrollbar{display:none}
+  .events.past>.ev{flex:0 0 82%;scroll-snap-align:none}
+}
 </style>
 </head>
 <body>
@@ -123,7 +128,7 @@ h1 .six{color:var(--red)}
       <div class="body">
         <span class="num"><b>Relive</b> &middot; 002</span><h2>K-65</h2>
         <p class="date">Fri 30 Oct &middot; Electro, breaks, techno &middot; Filmed live</p>
-        <span class="btn ghost">Hear the night &rarr;</span>
+        <span class="btn ghost">Experience the night &rarr;</span>
       </div>
     </a>
     <a class="ev done" href="viridity/">
@@ -131,7 +136,7 @@ h1 .six{color:var(--red)}
       <div class="body">
         <span class="num"><b>Relive</b> · 001</span><h2>Viridity</h2>
         <p class="date">Sat 17 Oct · Drum &amp; bass, live vocals · Filmed live</p>
-        <span class="btn ghost">Hear the night →</span>
+        <span class="btn ghost">Experience the night →</span>
       </div>
     </a>
   </div>
